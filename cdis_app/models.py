@@ -75,3 +75,10 @@ class Demographic(models.Model):
     date_of_birth = models.DateField(auto_now=False)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient')
 
+class Room(models.Model):
+    nursing_unit = models.CharField(max_length=8)
+    room = models.CharField(max_length= 15)
+    date_in = models.DateField(auto_now=False)
+    date_out = models.DateField(auto_now=False)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patients')
+    

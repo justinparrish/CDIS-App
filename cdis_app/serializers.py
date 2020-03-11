@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Employee, Patient, Demographic
+from .models import Employee, Patient, Demographic, Room
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,4 +18,9 @@ class PatientSerializer(serializers.ModelSerializer):
 class DemographicsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Demographic
-        fields = ['patient_name', 'age', 'date_of_birth', 'patient']
+        fields = ['id', 'patient_name', 'age', 'date_of_birth', 'patient']
+        
+class RoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Room
+        fields = ['id', 'nursing_unit', 'room', 'date_in', 'date_out', 'patient']
