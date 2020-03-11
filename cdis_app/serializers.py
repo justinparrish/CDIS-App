@@ -4,4 +4,4 @@ from .models import Employee
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'username', 'password', 'email']
