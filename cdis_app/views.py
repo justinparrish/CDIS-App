@@ -1,7 +1,7 @@
 from rest_framework import viewsets
-from .serializers import EmployeeSerializer, PatientSerializer
+from .serializers import EmployeeSerializer, PatientSerializer, DemographicsSerializer
 
-from .models import Employee, Patient
+from .models import Employee, Patient, Demographic
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
@@ -10,3 +10,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+    
+class DemographicViewSet(viewsets.ModelViewSet):
+    queryset = Demographic.objects.all()
+    serializer_class = DemographicsSerializer

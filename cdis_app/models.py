@@ -68,4 +68,10 @@ class Patient(models.Model):
     financial_class= models.CharField(max_length=60, choices=FINANCIAL_CLASS_CHOICES)
     status = models.BooleanField(choices=PATIENT_STATUS_CHOICES)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='employee')
+    
+class Demographic(models.Model):
+    patient_name = models.CharField(max_length=40)
+    age = models.IntegerField()
+    date_of_birth = models.DateField(auto_now=False)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient')
 

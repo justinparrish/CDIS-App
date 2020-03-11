@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Employee, Patient
+from .models import Employee, Patient, Demographic
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,3 +14,8 @@ class PatientSerializer(serializers.ModelSerializer):
                   'admit_date', 'discharge_date', 'length_of_stay',
                   'financial_class', 'status', 'employee'
                   ]
+        
+class DemographicsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Demographic
+        fields = ['patient_name', 'age', 'date_of_birth', 'patient']
