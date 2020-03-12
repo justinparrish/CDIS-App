@@ -95,6 +95,7 @@ class Query(models.Model):
     history_and_physical = models.CharField(max_length=1000)
     # Tx
     treatment = models.CharField(max_length=1000)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient+')
     
 class Review(models.Model):
     ep = models.CharField(max_length=500)
