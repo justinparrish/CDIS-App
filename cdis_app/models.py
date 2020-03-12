@@ -85,7 +85,7 @@ class Room(models.Model):
     room = models.CharField(max_length= 15)
     date_in = models.DateField(auto_now=False)
     date_out = models.DateField(auto_now=False)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patients')
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient+')
     
 class Query(models.Model):
     doctor_name = models.CharField(max_length=60)
