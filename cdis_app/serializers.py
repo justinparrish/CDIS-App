@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Employee, Patient, Demographic, Room
+from .models import Employee, Patient, Demographic, Room, Query
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,3 +24,12 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ['id', 'nursing_unit', 'room', 'date_in', 'date_out', 'patient']
+        
+class QuerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Query
+        fields = [
+                    'id', 'doctor_name', 'doctor_question', 
+                    'clinical_indicators', 'history_and_physical', 
+                    'treatment'
+                 ]

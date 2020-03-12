@@ -82,3 +82,11 @@ class Room(models.Model):
     date_out = models.DateField(auto_now=False)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patients')
     
+class Query(models.Model):
+    doctor_name = models.CharField(max_length=60)
+    doctor_question = models.CharField(max_length=1000)
+    clinical_indicators = models.CharField(max_length=1000)
+    # H&P
+    history_and_physical = models.CharField(max_length=1000)
+    # Tx
+    treatment = models.CharField(max_length=1000)
