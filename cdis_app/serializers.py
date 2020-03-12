@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Employee, Patient, Demographic, Room, Query
+from .models import Employee, Patient, Demographic, Room, Query, Review
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,3 +33,12 @@ class QuerySerializer(serializers.ModelSerializer):
                     'clinical_indicators', 'history_and_physical', 
                     'treatment'
                  ]
+        
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+                    'id', 'ep', 'vs', 'diagnostics',
+                    'mar', 'pmh', 'history_and_physical', 
+                    'query_opportunities', 'labs', 'patient'
+                ]

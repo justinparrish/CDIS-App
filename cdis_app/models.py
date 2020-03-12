@@ -6,6 +6,11 @@ PATIENT_STATUS_CHOICES = (
     (False, 'Discharged')
 )
 
+REVIEW_CHOICES = (
+    ('Review', 'Review'),
+    ('Re-Review', 'Re-Review')
+)
+
 FINANCIAL_CLASS_CHOICES = (
 ('Aetna HMO', 'Aetna HMO'),
 ('Aetna POS', 'Aetna POS'),
@@ -90,3 +95,14 @@ class Query(models.Model):
     history_and_physical = models.CharField(max_length=1000)
     # Tx
     treatment = models.CharField(max_length=1000)
+    
+class Review(models.Model):
+    ep = models.CharField(max_length=500)
+    vs = models.CharField(max_length=500)
+    diagnostics = models.CharField(max_length=500)
+    mar = models.CharField(max_length=500)
+    pmh = models.CharField(max_length=500)
+    history_and_physical = models.CharField(max_length=500)
+    query_opportunities = models.CharField(max_length=500)
+    labs = models.CharField(max_length=40, choices=REVIEW_CHOICES)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient+')
