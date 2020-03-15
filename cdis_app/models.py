@@ -12,6 +12,8 @@ REVIEW_CHOICES = (
 )
 
 FINANCIAL_CLASS_CHOICES = (
+('Medicare', 'Medicare'),
+('Medicaid', 'Medicaid'),
 ('Aetna HMO', 'Aetna HMO'),
 ('Aetna POS', 'Aetna POS'),
 ('Aetna PPO', 'Aetna PPO'),
