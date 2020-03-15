@@ -99,10 +99,10 @@ class Query(models.Model):
     
 class Review(models.Model):
     ep = models.CharField(max_length=500)
-    vs = models.CharField(max_length=500)
+    vital_signs = models.CharField(max_length=500)
     diagnostics = models.CharField(max_length=500)
-    mar = models.CharField(max_length=500)
-    pmh = models.CharField(max_length=500)
+    medication_administration_record = models.CharField(max_length=500)
+    past_medical_history = models.CharField(max_length=500)
     history_and_physical = models.CharField(max_length=500)
     query_opportunities = models.CharField(max_length=500)
     labs = models.CharField(max_length=40, choices=REVIEW_CHOICES)

@@ -38,7 +38,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = [
-                    'id', 'ep', 'vs', 'diagnostics',
-                    'mar', 'pmh', 'history_and_physical', 
+                    'id', 'ep', 'vital_signs', 'diagnostics',
+                    'medication_administration_record', 'past_medical_history', 'history_and_physical', 
                     'query_opportunities', 'labs', 'patient'
                 ]
