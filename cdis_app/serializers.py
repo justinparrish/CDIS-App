@@ -40,5 +40,5 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = [
                     'id', 'ep', 'vital_signs', 'diagnostics',
                     'medication_administration_record', 'past_medical_history', 'history_and_physical', 
-                    'query_opportunities', 'labs', 'patient'
+                    'query_opportunities', 'labs', 'type', 'patient'
                 ]
