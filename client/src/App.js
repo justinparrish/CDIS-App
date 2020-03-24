@@ -66,7 +66,7 @@ const docs = [
 
 //Employee
 const getEmployeeName = (employee) => (
-  <span>{employee.employeeName}</span>
+  <span>Employee Name: {employee.employeeName}</span>
 )
 
 //Patient Info
@@ -117,7 +117,7 @@ const queryList = (list) => (
 
 //Patient Review/Re-reivews
 const getPatientReview = (review) => (
-  <ul>
+  <ul style={{margin: '15px', border: '2px dotted grey'}}>
     <li>Ep: {review.ep}</li>
     <li>VS: {review.vitalSigns}</li>
     <li>Diagnostic: {review.diagnostic}</li>
@@ -127,6 +127,10 @@ const getPatientReview = (review) => (
     <li>Labs: {review.labs}</li>
     <li>Type: {review.type}</li>
   </ul>
+)
+
+const reviewList = (list) => (
+  <div>{list.map(getPatientReview)}</div>
 )
 
 //Test Data Structures
@@ -221,10 +225,13 @@ const App = () => {
   return (
     <div class="container">
       <h1>CDIS App</h1>
+      {getEmployeeName(employee)}
       {/* For List */}
       <h2>Patient</h2>
       <h3>Query List</h3>
       {queryList(patientQuerys)}
+      <h3>Review List</h3>
+      {reviewList(patientReviews)}
     </div>
   )
 }
