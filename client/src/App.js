@@ -64,10 +64,12 @@ const docs = [
 ]
 */
 
+//Employee
 const getEmployeeName = (employee) => (
   <span>{employee.employeeName}</span>
 )
 
+//Patient Info
 const getPatientInfo = (patient) => (
   <ul>
     <li>Account Number: {patient.accountNum}</li>
@@ -79,6 +81,7 @@ const getPatientInfo = (patient) => (
   </ul>
 )
 
+//Patient Demographics
 const getPatientDemographics = (patient) => (
   <ul>
     <li>Name: {patient.patientName}</li>
@@ -87,6 +90,7 @@ const getPatientDemographics = (patient) => (
   </ul>
 )
 
+//Patient Room Info
 const getPatientRoomInfo = (patient) => (
   <ul>
     <li>Nursing Unit: {patient.nursingUnit}</li>
@@ -96,8 +100,9 @@ const getPatientRoomInfo = (patient) => (
   </ul>
 )
 
+//Patient Query
 const getPatientQuery = (query) => (
-  <ul>
+  <ul style={{margin: '15px', border: '2px dotted grey'}}>
     <li>Doctor Name: {query.doctorName}</li>
     <li>Doctor Question: {query.doctorQuestion}</li>
     <li>Clinical Indicators: {query.clinicalIndicators}</li>
@@ -106,6 +111,11 @@ const getPatientQuery = (query) => (
   </ul>
 )
 
+const queryList = (list) => (
+<div>{list.map(getPatientQuery)}</div>
+)
+
+//Patient Review/Re-reivews
 const getPatientReview = (review) => (
   <ul>
     <li>Ep: {review.ep}</li>
@@ -119,6 +129,7 @@ const getPatientReview = (review) => (
   </ul>
 )
 
+//Test Data Structures
 const employee = { employeeName: "Tenia Parrish" }
 
 const patient = {
@@ -162,23 +173,58 @@ const patientReview = {
   type: "Review"
 }
 
+//List of Querys
+
+const patientQuerys = [
+  {
+    doctorName: 'Morgan, Phil R., NP',
+    doctorQuestion: "Doctor's Question number 1",
+    clinicalIndicators: "Pt admitted with Hypercapnia Respitory Failure with ALS",
+    historyAndPhysical: "history and physical 1",
+    treatment: "3/4/20 Normal Saline 60ml Tube flush given x 6"
+  },
+  {
+    doctorName: 'Smith, Greg P., NP',
+    doctorQuestion: "Doctor's Question number 2",
+    clinicalIndicators: "Pt admitted with Hypercapnia Respitory Failure with ALS",
+    historyAndPhysical: "history and physical 2",
+    treatment: "3/4/20 Normal Saline 60ml Tube flush given x 6"
+  }
+]
+
+//List of Reviews/Re-Reviews
+const patientReviews = [
+  {
+    ep: 'ep 1',
+    vitalSigns: "vital signs 1",
+    diagnostic: "diagnostic 1",
+    mar: "medication administration record 1",
+    historyAndPhysical: "history and physical 1",
+    queryOpp: "query opportunities 1",
+    labs: "lab results 1",
+    type: "Review"
+  },
+  {
+    ep: 'ep 2',
+    vitalSigns: "vital signs 2",
+    diagnostic: "diagnostic 2",
+    mar: "medication administration record 2",
+    historyAndPhysical: "history and physical 2",
+    queryOpp: "query opportunities 2",
+    labs: "lab results 2",
+    type: "Re-Review"
+  }
+
+]
+
 const App = () => {
   return (
     <div class="container">
       <h1>CDIS App</h1>
-      <h2>Employee Name</h2>
-      {getEmployeeName(employee)}
-      <h2>Patient Information</h2>
-      <h3>Info</h3>
-      {getPatientInfo(patient)}
-      <h3>Demographics</h3>
-      {getPatientDemographics(patientDemographics)}
-      <h3>Room Info</h3>
-      {getPatientRoomInfo(patientRoomInfo)}
-      <h3>Query</h3>
-      {getPatientQuery(patientQuery)}
-      <h3>Review</h3>
-      {getPatientReview(patientReview)}
+      {/* For List */}
+      <h2>Patient</h2>
+      <h3>Query List</h3>
+      {queryList(patientQuerys)}
     </div>
   )
 }
