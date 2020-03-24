@@ -15,7 +15,7 @@ const getPatientInfo = (patient) => (
     <li>Medical Record Number: {patient.medicalRecNum}</li>
     <li>Admit Date: {patient.admitDate}</li>
     <li>Length of Stay: {patient.lengthOfStay}</li>
-    <li>Financial Class: {patient.financailClass}</li>
+    <li>Financial Class: {patient.financialClass}</li>
     <li>Status: {patient.status}</li>
   </ul>
 )
@@ -41,7 +41,7 @@ const getPatientRoomInfo = (room) => (
 
 // ------------ Patient Query -------------
 const getPatientQuery = (query) => (
-  <ul style={{margin: '15px', border: '2px dotted grey'}}>
+  <ul style={{ margin: '15px', border: '2px dotted grey' }}>
     <li>Doctor Name: {query.doctorName}</li>
     <li>Doctor Question: {query.doctorQuestion}</li>
     <li>Clinical Indicators: {query.clinicalIndicators}</li>
@@ -51,12 +51,12 @@ const getPatientQuery = (query) => (
 )
 
 const queryList = (list) => (
-<div>{list.map(getPatientQuery)}</div>
+  <div>{list.map(getPatientQuery)}</div>
 )
 
 // ---------- Patient Review/Re-reivews ------------
 const getPatientReview = (review) => (
-  <ul style={{margin: '15px', border: '2px dotted grey'}}>
+  <ul style={{ margin: '15px', border: '2px dotted grey' }}>
     <li>Ep: {review.ep}</li>
     <li>VS: {review.vitalSigns}</li>
     <li>Diagnostic: {review.diagnostic}</li>
@@ -80,7 +80,7 @@ const patient = {
   medicalRecNum: 'EUH694321',
   admitDate: '2020-16-02',
   lengthOfStay: 3,
-  financailClass: 'Medicare',
+  financialClass: 'Medicare',
   status: 'Discharged',
 }
 
@@ -160,19 +160,55 @@ const patientReviews = [
 
 ]
 
-const App = () => {
-  return (
-    <div class="container">
-      <h1>CDIS App</h1>
-      {getEmployeeName(employee)}
-      {/* For List */}
-      <h2>Patient</h2>
-      <h3>Query List</h3>
-      {queryList(patientQueries)}
-      <h3>Review List</h3>
-      {reviewList(patientReviews)}
-    </div>
-  )
+const patientForm = () => (
+  <form>
+    <label>Accont Number</label>
+    <input type='text' name='accountNum' placeholder='Enter Account #' />
+    <label>Medical Record Number</label>
+    <input type='text' name='medicalRecNum' placeholder='Enter Medical Record #' />
+    <label>Admit Date</label>
+    <input type='date' name='admitDate' placeholder='When Admitted?' />
+    <label>Length of Stay</label>
+    <input type='number' name='lengthOfStay' placeholder='How Long was the stay?' />
+    <label>Financial Class</label>
+    <input type='text' name='financialClass' placeholder='Medicaid, Medicare, etc.' />
+    <label>Status</label>
+    <input type='text' name='status' placeholder='Admitted or Discharged' />
+    <label>Patient Name</label>
+    <input type='text' name='patientName' placeholder='Last, First I' />
+    <label>Patient Age</label>
+    <input type='number' name='age' placeholder='Current Age'/>
+    <label>Patient Date Of Birth</label>
+    <input type='date' name='dob' />
+    <label>Nursing Unit</label>
+    <input type='text' name='nursingUnit' placeholder='T5-S' />
+    <label>Room</label>
+    <input type='text' name='room' placeholder='T509-01' />
+    <label>Date In</label>
+    <input type='date' name='dateIn' />
+    <label>Date Out</label>
+    <input type='date' name='dateOut' />
+    <input type='submit' value='Add' />
+  </form>
+)
+
+class App extends React.Component {
+  render() {
+    return (
+      <div class="container">
+        <h1>CDIS App</h1>
+        {getEmployeeName(employee)}
+        {/* For List */}
+        <h2>Patient</h2>
+        <h3>New Patient</h3>
+        {patientForm()}
+        <h3>Query List</h3>
+        {queryList(patientQueries)}
+        <h3>Review List</h3>
+        {reviewList(patientReviews)}
+      </div>
+    )
+  }
 }
 
 export default App;
