@@ -88,7 +88,12 @@ const getPatientDemographics = (patient) => (
 )
 
 const getPatientRoomInfo = (patient) => (
-  
+  <ul>
+    <li>Nursing Unit: {patient.nursingUnit}</li>
+    <li>Room: {patient.room}</li>
+    <li>Date In: {patient.datein}</li>
+    <li>Date Out: {patient.dateOut}</li>
+  </ul>
 )
 
 const employee = { employeeName: "Tenia Parrish" }
@@ -126,6 +131,8 @@ const App = () => {
       {getPatientInfo(patient)}
       <h3>Demographics</h3>
       {getPatientDemographics(patientDemographics)}
+      <h3>Room Info</h3>
+      {getPatientRoomInfo(patientRoomInfo)}
     </div>
   )
 }
