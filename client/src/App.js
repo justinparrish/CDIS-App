@@ -96,6 +96,16 @@ const getPatientRoomInfo = (patient) => (
   </ul>
 )
 
+const getPatientQuery = (query) => (
+  <ul>
+    <li>Doctor Name: {query.doctorName}</li>
+    <li>Doctor Question: {query.doctorQuestion}</li>
+    <li>Clinical Indicators: {query.clinicalIndicators}</li>
+    <li>H&P: {query.historyAndPhysical}</li>
+    <li>Tx: {query.treatment}</li>
+  </ul>
+)
+
 const employee = { employeeName: "Tenia Parrish" }
 
 const patient = {
@@ -120,6 +130,14 @@ const patientRoomInfo = {
   dateOut: '2020-19-02',
 }
 
+const patientQuery = {
+  doctorName: 'Morgan, Phil R., NP',
+  doctorQuestion: "Doctor's Question number 1",
+  clinicalIndicators: "Pt admitted with Hypercapnia Respitory Failure with ALS",
+  historyAndPhysical: "history and physical 1",
+  treatment: "3/4/20 Normal Saline 60ml Tube flush given x 6"
+}
+
 const App = () => {
   return (
     <div class="container">
@@ -133,6 +151,8 @@ const App = () => {
       {getPatientDemographics(patientDemographics)}
       <h3>Room Info</h3>
       {getPatientRoomInfo(patientRoomInfo)}
+      <h3>Query</h3>
+      {getPatientQuery(patientQuery)}
     </div>
   )
 }
