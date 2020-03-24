@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { Menu, Segment } from 'semantic-ui-react'
 
-
 /*
 //Test Data Structure
 const docs = [
@@ -64,10 +63,19 @@ const docs = [
 }
 ]
 */
+
+const getEmployeeName = (employee) => (
+  <span>{employee.employeeName}</span>
+)
+
+const employee = {employeeName : "Tenia Parrish"}
+
 const App = () => {
   return (
     <div class="container">
       <h1>CDIS App</h1>
+      <h2>Employee Name</h2> 
+      {getEmployeeName(employee)}
     </div>
   )
 }
