@@ -68,14 +68,64 @@ const getEmployeeName = (employee) => (
   <span>{employee.employeeName}</span>
 )
 
-const employee = {employeeName : "Tenia Parrish"}
+const getPatientInfo = (patient) => (
+  <ul>
+    <li>Account Number: {patient.accountNum}</li>
+    <li>Medical Record Number: {patient.medicalRecNum}</li>
+    <li>Admit Date: {patient.admitDate}</li>
+    <li>Length of Stay: {patient.lengthOfStay}</li>
+    <li>Financial Class: {patient.financailClass}</li>
+    <li>Status: {patient.status}</li>
+  </ul>
+)
+
+const getPatientDemographics = (patient) => (
+  <ul>
+    <li>Name: {patient.patientName}</li>
+    <li>Age: {patient.age}</li>
+    <li>Date of Birth: {patient.dob}</li>
+  </ul>
+)
+
+const getPatientRoomInfo = (patient) => (
+  
+)
+
+const employee = { employeeName: "Tenia Parrish" }
+
+const patient = {
+  accountNum: 'EUH6304393485',
+  medicalRecNum: 'EUH694321',
+  admitDate: '2020-16-02',
+  lengthOfStay: 3,
+  financailClass: 'Medicare',
+  status: 'Discharged',
+}
+
+const patientDemographics = {
+  patientName: 'Nelson, Justin D',
+  age: 20,
+  dob: '2000-10-03'
+}
+
+const patientRoomInfo = {
+  nursingUnit: 'T5-S',
+  room: 'T509-01',
+  dateIn: '2020-16-02',
+  dateOut: '2020-19-02',
+}
 
 const App = () => {
   return (
     <div class="container">
       <h1>CDIS App</h1>
-      <h2>Employee Name</h2> 
+      <h2>Employee Name</h2>
       {getEmployeeName(employee)}
+      <h2>Patient Information</h2>
+      <h3>Info</h3>
+      {getPatientInfo(patient)}
+      <h3>Demographics</h3>
+      {getPatientDemographics(patientDemographics)}
     </div>
   )
 }
