@@ -2,9 +2,8 @@ import React from 'react';
 import './App.css';
 import { Menu, Segment } from 'semantic-ui-react'
 
-const employeeName = (name) => (<li>{name.name}</li>)
-const employeeNames = (list) => (<ul>{list.map(employeeName)}</ul>)
 
+/*
 //Test Data Structure
 const docs = [
 {
@@ -64,21 +63,13 @@ const docs = [
   }
 }
 ]
-
-class App extends React.Component {
-  state = {
-    employess: docs
-  }
-
-  render() {
-    return (
-      <div className='container'>
-        <h1>CDIS APP</h1>
-        {console.log(this.state)}
-        {employeeName(this.state.employess[0][1])}
-      </div>
-    );
-  }
+*/
+const App = () => {
+  return (
+    <div class="container">
+      <h1>CDIS App</h1>
+    </div>
+  )
 }
 
 export default App;
