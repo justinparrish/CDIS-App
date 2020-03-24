@@ -106,6 +106,19 @@ const getPatientQuery = (query) => (
   </ul>
 )
 
+const getPatientReview = (review) => (
+  <ul>
+    <li>Ep: {review.ep}</li>
+    <li>VS: {review.vitalSigns}</li>
+    <li>Diagnostic: {review.diagnostic}</li>
+    <li>Mar: {review.mar}</li>
+    <li>H&P: {review.historyAndPhysical}</li>
+    <li>Query Opportunites: {review.queryOpp}</li>
+    <li>Labs: {review.labs}</li>
+    <li>Type: {review.type}</li>
+  </ul>
+)
+
 const employee = { employeeName: "Tenia Parrish" }
 
 const patient = {
@@ -138,6 +151,17 @@ const patientQuery = {
   treatment: "3/4/20 Normal Saline 60ml Tube flush given x 6"
 }
 
+const patientReview = {
+  ep: 'ep 1',
+  vitalSigns: "vital signs 1",
+  diagnostic: "diagnostic 1",
+  mar: "medication administration record 1",
+  historyAndPhysical: "history and physical 1",
+  queryOpp: "query opportunities 1",
+  labs: "lab results 1",
+  type: "Review"
+}
+
 const App = () => {
   return (
     <div class="container">
@@ -153,6 +177,8 @@ const App = () => {
       {getPatientRoomInfo(patientRoomInfo)}
       <h3>Query</h3>
       {getPatientQuery(patientQuery)}
+      <h3>Review</h3>
+      {getPatientReview(patientReview)}
     </div>
   )
 }
