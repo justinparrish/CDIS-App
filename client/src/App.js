@@ -2,74 +2,13 @@ import React from 'react';
 import './App.css';
 import { Menu, Segment } from 'semantic-ui-react'
 
-/*
-//Test Data Structure
-const docs = [
-{
-  1: {
-    id: 1,
-    name: 'Tenia Parrish',
-    username: 'tenia64',
-    password: 'tenia71',
-    email: 'tenia64@msn.com',
-    patients: [
-      {
-        id: 1,
-        accountNum: 'EUH6304393485',
-        medicalRecNum: 'EUH694321',
-        admitDate: '2020-16-02',
-        lengthOfStay: 3,
-        financailClass: 'Medicare',
-        status: 'Discharged',
-        demographic: {
-          id: 1,
-          patientName: 'Nelson, Justin D',
-          age: 20,
-          dob: '2000-10-03'
-        },
-        room: {
-          id: 1,
-          nursingUnit: 'T5-S',
-          room: 'T509-01',
-          dateIn: '2020-16-02',
-          dateOut: '2020-19-02',
-        },
-        query: [
-          {
-            id: 1,
-            doctorName: 'Morgan, Phil R., NP',
-            doctorQuestion: "Doctor's Question number 1",
-            clinicalIndicators: "Pt admitted with Hypercapnia Respitory Failure with ALS",
-            historyAndPhysical: "history and physical 1",
-            treatment: "3/4/20 Normal Saline 60ml Tube flush given x 6",
-          }
-        ],
-        review: [
-          {
-            id: 1,
-            ep: 'ep 1',
-            vitalSigns: "vital signs 1",
-            diagnostic: "diagnostic 1",
-            mar: "medication administration record 1",
-            historyAndPhysical: "history and physical 1",
-            queryOpp: "query opportunities 1",
-            labs: "lab results 1",
-            type: "Review"
-          }
-        ]
-      }
-    ]
-  }
-}
-]
-*/
 
-//Employee
+// --------- Employee ------------
 const getEmployeeName = (employee) => (
   <span>Employee Name: {employee.employeeName}</span>
 )
 
-//Patient Info
+// ---------- Patient Info ----------
 const getPatientInfo = (patient) => (
   <ul>
     <li>Account Number: {patient.accountNum}</li>
@@ -81,26 +20,26 @@ const getPatientInfo = (patient) => (
   </ul>
 )
 
-//Patient Demographics
-const getPatientDemographics = (patient) => (
+// ----------- Patient Demographics ---------------
+const getPatientDemographics = (demographic) => (
   <ul>
-    <li>Name: {patient.patientName}</li>
-    <li>Age: {patient.age}</li>
-    <li>Date of Birth: {patient.dob}</li>
+    <li>Name: {demographic.patientName}</li>
+    <li>Age: {demographic.age}</li>
+    <li>Date of Birth: {demographic.dob}</li>
   </ul>
 )
 
-//Patient Room Info
-const getPatientRoomInfo = (patient) => (
+// ----------- Patient Room Info -------------
+const getPatientRoomInfo = (room) => (
   <ul>
-    <li>Nursing Unit: {patient.nursingUnit}</li>
-    <li>Room: {patient.room}</li>
-    <li>Date In: {patient.datein}</li>
-    <li>Date Out: {patient.dateOut}</li>
+    <li>Nursing Unit: {room.nursingUnit}</li>
+    <li>Room: {room.room}</li>
+    <li>Date In: {room.datein}</li>
+    <li>Date Out: {room.dateOut}</li>
   </ul>
 )
 
-//Patient Query
+// ------------ Patient Query -------------
 const getPatientQuery = (query) => (
   <ul style={{margin: '15px', border: '2px dotted grey'}}>
     <li>Doctor Name: {query.doctorName}</li>
@@ -115,7 +54,7 @@ const queryList = (list) => (
 <div>{list.map(getPatientQuery)}</div>
 )
 
-//Patient Review/Re-reivews
+// ---------- Patient Review/Re-reivews ------------
 const getPatientReview = (review) => (
   <ul style={{margin: '15px', border: '2px dotted grey'}}>
     <li>Ep: {review.ep}</li>
@@ -133,7 +72,7 @@ const reviewList = (list) => (
   <div>{list.map(getPatientReview)}</div>
 )
 
-//Test Data Structures
+// ----------- Test Data Structures --------------
 const employee = { employeeName: "Tenia Parrish" }
 
 const patient = {
@@ -177,9 +116,9 @@ const patientReview = {
   type: "Review"
 }
 
-//List of Querys
+// ---------- List of Queries -----------
 
-const patientQuerys = [
+const patientQueries = [
   {
     doctorName: 'Morgan, Phil R., NP',
     doctorQuestion: "Doctor's Question number 1",
@@ -229,7 +168,7 @@ const App = () => {
       {/* For List */}
       <h2>Patient</h2>
       <h3>Query List</h3>
-      {queryList(patientQuerys)}
+      {queryList(patientQueries)}
       <h3>Review List</h3>
       {reviewList(patientReviews)}
     </div>
