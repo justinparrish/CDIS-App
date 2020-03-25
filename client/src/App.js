@@ -171,6 +171,9 @@ class App extends React.Component {
   addNewQuery = (info) => {
     console.log("Query From App Comp.", info)
   }
+  addNewReview = (info) => {
+    console.log("Review From App Comp.", info)
+  }
   render() {
     return (
       <div class="container">
@@ -179,12 +182,12 @@ class App extends React.Component {
         {/* For List */}
         <h2>Patient</h2>
         <h3>New Patient</h3>
-        <PatientForm addNewPatient={this.addNewPatient}/>
+        <PatientForm addNewPatient={this.addNewPatient} />
         <h3>Query List</h3>
-        <QueryForm addNewQuery={this.addNewQuery}/>
+        <QueryForm addNewQuery={this.addNewQuery} />
         {queryList(patientQueries)}
         <h3>Review List</h3>
-        <ReviewForm />
+        <ReviewForm addNewReview={this.addNewReview} />
         {reviewList(patientReviews)}
       </div>
     )
