@@ -1,6 +1,16 @@
 import React, { Component } from 'react'
 
 export default class ReviewForm extends Component {
+    state = {
+        ep: '',
+        vitalSigns: '',
+        diagnostic: '',
+        mar: '',
+        historyAndPhysical: '',
+        queryOpp: '',
+        labs: '',
+        type: ''
+    }
     render() {
         return (
             <form>
