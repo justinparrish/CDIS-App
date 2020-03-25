@@ -29,7 +29,7 @@ export default class PatientForm extends Component {
     handleSubmit = (evnt) => {
         evnt.preventDefault()
         
-        console.log(this.state)
+        this.props.addNewPatient(this.state)
     }
     render() {
         return (
