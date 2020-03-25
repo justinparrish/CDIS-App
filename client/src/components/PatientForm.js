@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 export default class PatientForm extends Component {
+    state = {
+        
+    }
     render() {
         return (
             <form>
