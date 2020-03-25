@@ -34,6 +34,7 @@ export default class PatientForm extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+                <fieldset>
                 <label>Accont Number</label>
                 <input type='text' name='accountNum' placeholder='Enter Account #' onChange={this.handleInputs} />
                 <label>Medical Record Number</label>
@@ -44,6 +45,8 @@ export default class PatientForm extends Component {
                 <input type='number' name='lengthOfStay' placeholder='How Long was the stay?' onChange={this.handleInputs} />
                 <label>Financial Class</label>
                 <input type='text' name='financialClass' placeholder='Medicaid, Medicare, etc.' onChange={this.handleInputs} />
+                </fieldset>
+                <fieldset>
                 <label>Status</label>
                 <input type='text' name='status' placeholder='Admitted or Discharged' onChange={this.handleInputs} />
                 <label>Patient Name</label>
@@ -56,11 +59,14 @@ export default class PatientForm extends Component {
                 <input type='text' name='nursingUnit' placeholder='T5-S' onChange={this.handleInputs} />
                 <label>Room</label>
                 <input type='text' name='room' placeholder='T509-01' onChange={this.handleInputs} />
+                </fieldset>
+                <fieldset>
                 <label>Date In</label>
                 <input type='date' name='dateIn' onChange={this.handleInputs} />
                 <label>Date Out</label>
                 <input type='date' name='dateOut' onChange={this.handleInputs} />
                 <input type='submit' value='Add' />
+                </fieldset>
             </form>
         )
     }
