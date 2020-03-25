@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import PatientForm from './components/PatientForm'
 import QueryForm from './components/QueryForm';
+import ReviewForm from './components/ReviewForm'
 import { Menu, Segment } from 'semantic-ui-react'
 
 
@@ -162,31 +163,6 @@ const patientReviews = [
 
 ]
 
-const reviewForm = () => (
-  <form>
-    <fieldset>
-    <label>Ep</label>
-    <input type='text' name='ep' placeholder='500 Words Max'/>
-    <label>Vital Signs</label>
-    <input type='text' name='vitalSigns' placeholder='500 Words Max'/>
-    <label>Diagnostics</label>
-    <input type='text' name='diagnostic' placeholder='500 Words Max'/>
-    <label>Mar</label>
-    <input type='text' name='mar' placeholder='500 Words Max'/>
-    <label>H&P</label>
-    <input type='text' name='historyAndPhysical' placeholder='500 Words Max'/>
-    <label>Query Opportunites</label>
-    <input type='text' name='queryOpp' placeholder='500 Words Max'/>
-    </fieldset>
-    <fieldset>
-    <label>Labs</label>
-    <input type='text' name='labs' placeholder='500 Words Max'/>
-    <label>Type</label>
-    <input type='text' name='type' placeholder='Review or Re-Review'/>
-    <input type='submit' value='Add' />
-    </fieldset>
-  </form>
-)
 
 class App extends React.Component {
   addNewPatient = (info) => {
@@ -208,7 +184,7 @@ class App extends React.Component {
         <QueryForm addNewQuery={this.addNewQuery}/>
         {queryList(patientQueries)}
         <h3>Review List</h3>
-        {reviewForm()}
+        <ReviewForm />
         {reviewList(patientReviews)}
       </div>
     )
