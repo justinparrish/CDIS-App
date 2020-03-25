@@ -22,7 +22,7 @@ export default class ReviewForm extends Component {
     handleSubmit = (evnt) => {
         evnt.preventDefault()
 
-        console.log(this.state)
+        this.props.addNewReview(this.state)
     }
 
     render() {
