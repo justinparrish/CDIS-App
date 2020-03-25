@@ -161,11 +161,30 @@ const patientReviews = [
 
 ]
 
+const queryForm = () => (
+  <form>
+    <fieldset>
+    <label>Doctor Name</label>
+    <input type='text' name='doctorName' placeholder='Doe, John D., NP' />
+    <label>Doctor Question</label>
+    <input type='text' name='doctorQuestion' placeholder="1,000 Words Max" />
+    <label>Clinical Indicators</label>
+    <input type='text' name='clinicalIndicators' placeholder='1,000 Words Max' />
+    <label>H&P</label>
+    <input type='text' name='historyAndPhysical' placeholder='1,000 Words Max' />
+    <label>Treatment</label>
+    <input type='text' name='treatment' placeholder='1,000 Words Max' />
+    <input type='submit' value='Add' />
+    </fieldset>
+  </form>
+)
+
 
 class App extends React.Component {
   addNewPatient = (info) => {
     console.log("From App Comp.",info)
   }
+
   render() {
     return (
       <div class="container">
@@ -176,6 +195,7 @@ class App extends React.Component {
         <h3>New Patient</h3>
         <PatientForm addNewPatient={this.addNewPatient}/>
         <h3>Query List</h3>
+        {queryForm()}
         {queryList(patientQueries)}
         <h3>Review List</h3>
         {reviewList(patientReviews)}
