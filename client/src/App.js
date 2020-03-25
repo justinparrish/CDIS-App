@@ -166,9 +166,11 @@ const patientReviews = [
 
 class App extends React.Component {
   addNewPatient = (info) => {
-    console.log("From App Comp.",info)
+    console.log("Patient From App Comp.", info)
   }
-
+  addNewQuery = (info) => {
+    console.log("Query From App Comp.", info)
+  }
   render() {
     return (
       <div class="container">
@@ -179,7 +181,7 @@ class App extends React.Component {
         <h3>New Patient</h3>
         <PatientForm addNewPatient={this.addNewPatient}/>
         <h3>Query List</h3>
-        <QueryForm />
+        <QueryForm addNewQuery={this.addNewQuery}/>
         {queryList(patientQueries)}
         <h3>Review List</h3>
         {reviewList(patientReviews)}
