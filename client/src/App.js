@@ -165,14 +165,25 @@ const patientReviews = [
 
 
 class App extends React.Component {
+  state = {
+    review: patientReviews,
+    queries: patientQueries
+  }
+
   addNewPatient = (info) => {
     console.log("Patient From App Comp.", info)
   }
   addNewQuery = (info) => {
     console.log("Query From App Comp.", info)
+    let state = {...this.state}
+    state.queries.push(info)
+    this.setState(state)
   }
   addNewReview = (info) => {
     console.log("Review From App Comp.", info)
+    let state = {...this.state}
+    state.review.push(info)
+    this.setState(state)
   }
   render() {
     return (
