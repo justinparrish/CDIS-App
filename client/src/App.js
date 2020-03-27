@@ -163,41 +163,106 @@ const patientReviews = [
 
 ]
 
-
+const docs = [
+  {
+    1: {
+      id: 1,
+      name: 'Tenia Parrish',
+      username: 'tenia64',
+      password: 'tenia71',
+      email: 'tenia64@msn.com',
+      patients: [
+        {
+          id: 1,
+          accountNum: 'EUH6304393485',
+          medicalRecNum: 'EUH694321',
+          admitDate: '2020-16-02',
+          lengthOfStay: 3,
+          financailClass: 'Medicare',
+          status: 'Discharged',
+          demographic: {
+            id: 1,
+            patientName: 'Nelson, Justin D',
+            age: 20,
+            dob: '2000-10-03'
+          },
+          room: {
+            id: 1,
+            nursingUnit: 'T5-S',
+            room: 'T509-01',
+            dateIn: '2020-16-02',
+            dateOut: '2020-19-02',
+          },
+          query: [
+            {
+              id: 1,
+              doctorName: 'Morgan, Phil R., NP',
+              doctorQuestion: "Doctor's Question number 1",
+              clinicalIndicators: "Pt admitted with Hypercapnia Respitory Failure with ALS",
+              historyAndPhysical: "history and physical 1",
+              treatment: "3/4/20 Normal Saline 60ml Tube flush given x 6",
+            }
+          ],
+          review: [
+            {
+              id: 1,
+              ep: 'ep 1',
+              vitalSigns: "vital signs 1",
+              diagnostic: "diagnostic 1",
+              mar: "medication administration record 1",
+              historyAndPhysical: "history and physical 1",
+              queryOpp: "query opportunities 1",
+              labs: "lab results 1",
+              type: "Review"
+            }
+          ]
+        }
+      ]
+    }
+  }
+  ]
+  
 class App extends React.Component {
   state = {
-    review: patientReviews,
-    queries: patientQueries
+    employees: docs,
+    currentEmployee: 'tenia64'
   }
+
+  getCurrentEmployee = () => (
+    this.state.currentEmployee
+  )
 
   addNewPatient = (info) => {
     console.log("Patient From App Comp.", info)
   }
   addNewQuery = (info) => {
     console.log("Query From App Comp.", info)
-    let state = {...this.state}
+    let state = { ...this.state }
     state.queries.push(info)
     this.setState(state)
   }
   addNewReview = (info) => {
     console.log("Review From App Comp.", info)
-    let state = {...this.state}
+    let state = { ...this.state }
     state.review.push(info)
     this.setState(state)
   }
   render() {
     return (
       <div class="container">
+        <button>Current Employee</button>
         <h1>CDIS App</h1>
         {getEmployeeName(employee)}
         {/* For List */}
-        <h2>Patient</h2>
+        <h2>Patients</h2>
         <h3>New Patient</h3>
         <PatientForm addNewPatient={this.addNewPatient} />
         <h3>Query List</h3>
+        <h4>New Query</h4>
         <QueryForm addNewQuery={this.addNewQuery} />
         {queryList(patientQueries)}
         <h3>Review List</h3>
+        <h4>New Review</h4>
         <ReviewForm addNewReview={this.addNewReview} />
         {reviewList(patientReviews)}
       </div>
