@@ -23,6 +23,16 @@ const getPatientInfo = (patient) => (
   </ul>
 )
 
+const listPatientInfo = (patients) => (
+<div>{patients.map(getPatientInfo)}</div>
+)
+
+const employeePatients = (employee) => (
+  <div>
+    {listPatientInfo(employee.patients)}
+  </div>
+)
+
 // ----------- Patient Demographics ---------------
 const getPatientDemographics = (demographic) => (
   <ul>
@@ -244,6 +254,8 @@ class App extends React.Component {
         <h2>Patients</h2>
         <h3>New Patient</h3>
         <PatientForm addNewPatient={this.addNewPatient} />
+        <h3>Patient Info</h3>
+        {employeePatients(this.getCurrentEmployee())}
         <h3>Query List</h3>
         <h4>New Query</h4>
         <QueryForm addNewQuery={this.addNewQuery} />
