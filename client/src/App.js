@@ -75,6 +75,16 @@ const reviewList = (list) => (
   <div>{list.map(getPatientReview)}</div>
 )
 
+const employeeUsername = (employee) => (
+  <option value={employee.id}>{employee.username}</option>
+)
+
+const employeeList = (employees, currentEmployee, onChange) => (
+  <select value={currentEmployee} onChange={(evnt) => onChange(evnt.target.value)}>
+    {employees.map(employeeUsername)}
+  </select>
+)
+
 // ----------- Test Data Structures --------------
 const employee = { employeeName: "Tenia Parrish" }
 
@@ -163,7 +173,7 @@ const patientReviews = [
 
 ]
 
-const docs = [
+const docs = 
   {
     1: {
       id: 1,
@@ -218,9 +228,63 @@ const docs = [
           ]
         }
       ]
+    },
+    2: {
+      id: 2,
+      name: 'Justin Parrish',
+      username: 'Justin12',
+      password: 'justin2112',
+      email: 'justin@msn.com',
+      patients: [
+        {
+          id: 1,
+          accountNum: 'EUH6304393485',
+          medicalRecNum: 'EUH694321',
+          admitDate: '2020-16-02',
+          lengthOfStay: 3,
+          financailClass: 'Medicare',
+          status: 'Discharged',
+          demographic: {
+            id: 1,
+            patientName: 'Nelson, D',
+            age: 10,
+            dob: '2010-10-03'
+          },
+          room: {
+            id: 1,
+            nursingUnit: 'T4-S',
+            room: 'T411-01',
+            dateIn: '2020-11-02',
+            dateOut: '2020-11-02',
+          },
+          query: [
+            {
+              id: 1,
+              doctorName: 'Morgan, R., NP',
+              doctorQuestion: "Doctor's Quen number 1",
+              clinicalIndicators: "Pt ted with Hypercapnia Respitory Failure with ALS",
+              historyAndPhysical: "ory and physical 1",
+              treatment: "3rmal Saline 60ml Tube flush given x 6",
+            }
+          ],
+          review: [
+            {
+              id: 1,
+              ep: 'ep 1',
+              vitalSigns: "val signs 1",
+              diagnostic: "dgnostic 1",
+              mar: "medicn administration record 1",
+              historyAndPhysical: "his and physical 1",
+              queryOpp: "query opnities 1",
+              labs: "lab resu1",
+              type: "Review"
+            }
+          ]
+        }
+      ]
     }
   }
-  ]
+  
   
 class App extends React.Component {
   state = {
@@ -228,9 +292,13 @@ class App extends React.Component {
     currentEmployee: 'tenia64'
   }
 
-  getCurrentEmployee = () => (
-    this.state.currentEmployee
+  getAllEmployees = () => (
+    Object.values(this.state.employees)
   )
+
+  setCurrentEmployee = (currentEmployee) => {
+    this.setState({currentEmployee})
+  }
 
   addNewPatient = (info) => {
     console.log("Patient From App Comp.", info)
@@ -250,9 +318,10 @@ class App extends React.Component {
   render() {
     return (
       <div class="container">
-        <button>Current Employee</button>
+        <button onClick={this.getCurrentEmployee}>Current Employee</button>
         <h1>CDIS App</h1>
-        {getEmployeeName(employee)}
+        {/* {getEmployeeName(employee)} */}
+        {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
         {/* For List */}
         <h2>Patients</h2>
         <h3>New Patient</h3>
@@ -260,11 +329,11 @@ class App extends React.Component {
         <h3>Query List</h3>
         <h4>New Query</h4>
         <QueryForm addNewQuery={this.addNewQuery} />
-        {queryList(patientQueries)}
+        {/* {queryList(patientQueries)} */}
         <h3>Review List</h3>
         <h4>New Review</h4>
         <ReviewForm addNewReview={this.addNewReview} />
-        {reviewList(patientReviews)}
+        {/* {reviewList(patientReviews)} */}
       </div>
     )
   }
