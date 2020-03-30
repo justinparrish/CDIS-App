@@ -8,7 +8,7 @@ import { Menu, Segment } from 'semantic-ui-react'
 
 // --------- Employee ------------
 const getEmployeeName = (employee) => (
-  <span>Employee Name: {employee.employeeName}</span>
+  <h4>Employee Name: {employee.name}</h4>
 )
 
 // ---------- Patient Info ----------
@@ -75,6 +75,7 @@ const reviewList = (list) => (
   <div>{list.map(getPatientReview)}</div>
 )
 
+//List of employees
 const employeeUsername = (employee) => (
   <option value={employee.id}>{employee.username}</option>
 )
@@ -85,94 +86,7 @@ const employeeList = (employees, currentEmployee, onChange) => (
   </select>
 )
 
-// ----------- Test Data Structures --------------
-const employee = { employeeName: "Tenia Parrish" }
-
-const patient = {
-  accountNum: 'EUH6304393485',
-  medicalRecNum: 'EUH694321',
-  admitDate: '2020-16-02',
-  lengthOfStay: 3,
-  financialClass: 'Medicare',
-  status: 'Discharged',
-}
-
-const patientDemographics = {
-  patientName: 'Nelson, Justin D',
-  age: 20,
-  dob: '2000-10-03'
-}
-
-const patientRoomInfo = {
-  nursingUnit: 'T5-S',
-  room: 'T509-01',
-  dateIn: '2020-16-02',
-  dateOut: '2020-19-02',
-}
-
-const patientQuery = {
-  doctorName: 'Morgan, Phil R., NP',
-  doctorQuestion: "Doctor's Question number 1",
-  clinicalIndicators: "Pt admitted with Hypercapnia Respitory Failure with ALS",
-  historyAndPhysical: "history and physical 1",
-  treatment: "3/4/20 Normal Saline 60ml Tube flush given x 6"
-}
-
-const patientReview = {
-  ep: 'ep 1',
-  vitalSigns: "vital signs 1",
-  diagnostic: "diagnostic 1",
-  mar: "medication administration record 1",
-  historyAndPhysical: "history and physical 1",
-  queryOpp: "query opportunities 1",
-  labs: "lab results 1",
-  type: "Review"
-}
-
-// ---------- List of Queries -----------
-
-const patientQueries = [
-  {
-    doctorName: 'Morgan, Phil R., NP',
-    doctorQuestion: "Doctor's Question number 1",
-    clinicalIndicators: "Pt admitted with Hypercapnia Respitory Failure with ALS",
-    historyAndPhysical: "history and physical 1",
-    treatment: "3/4/20 Normal Saline 60ml Tube flush given x 6"
-  },
-  {
-    doctorName: 'Smith, Greg P., NP',
-    doctorQuestion: "Doctor's Question number 2",
-    clinicalIndicators: "Pt admitted with Hypercapnia Respitory Failure with ALS",
-    historyAndPhysical: "history and physical 2",
-    treatment: "3/4/20 Normal Saline 60ml Tube flush given x 6"
-  }
-]
-
-//List of Reviews/Re-Reviews
-const patientReviews = [
-  {
-    ep: 'ep 1',
-    vitalSigns: "vital signs 1",
-    diagnostic: "diagnostic 1",
-    mar: "medication administration record 1",
-    historyAndPhysical: "history and physical 1",
-    queryOpp: "query opportunities 1",
-    labs: "lab results 1",
-    type: "Review"
-  },
-  {
-    ep: 'ep 2',
-    vitalSigns: "vital signs 2",
-    diagnostic: "diagnostic 2",
-    mar: "medication administration record 2",
-    historyAndPhysical: "history and physical 2",
-    queryOpp: "query opportunities 2",
-    labs: "lab results 2",
-    type: "Re-Review"
-  }
-
-]
-
+// ----------- Test Data Structure --------------
 const docs = 
   {
     1: {
@@ -289,7 +203,7 @@ const docs =
 class App extends React.Component {
   state = {
     employees: docs,
-    currentEmployee: 'tenia64'
+    currentEmployee: 1
   }
 
   getAllEmployees = () => (
@@ -299,6 +213,10 @@ class App extends React.Component {
   setCurrentEmployee = (currentEmployee) => {
     this.setState({currentEmployee})
   }
+
+  getCurrentEmployee = () => (
+    this.state.employees[this.state.currentEmployee]
+  )
 
   addNewPatient = (info) => {
     console.log("Patient From App Comp.", info)
@@ -320,7 +238,7 @@ class App extends React.Component {
       <div class="container">
         <button onClick={this.getCurrentEmployee}>Current Employee</button>
         <h1>CDIS App</h1>
-        {/* {getEmployeeName(employee)} */}
+        {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
         {/* For List */}
         <h2>Patients</h2>
