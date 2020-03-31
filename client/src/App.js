@@ -43,6 +43,8 @@ const getPatientDemographics = (demographic) => (
   </ul>
 )
 
+
+
 // ----------- Patient Room Info -------------
 const getPatientRoomInfo = (room) => (
   <ul>
