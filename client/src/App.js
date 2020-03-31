@@ -4,6 +4,7 @@ import PatientForm from './components/PatientForm'
 import QueryForm from './components/QueryForm';
 import ReviewForm from './components/ReviewForm'
 import { Menu, Segment, Table } from 'semantic-ui-react'
+import DemographicTable from './components/DemographicTable';
 
 
 // --------- Employee ------------
@@ -251,19 +252,10 @@ class App extends React.Component {
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
         {/* For List */}
-        <h3>New Patient</h3>
-        <PatientForm addNewPatient={this.addNewPatient} />
         <h3>Patient Info</h3>
         {employeePatients(this.getCurrentEmployee())}
         <h3>Patient Demographics</h3>
-        <h3>Query List</h3>
-        <h4>New Query</h4>
-        <QueryForm addNewQuery={this.addNewQuery} />
-        {/* {queryList(patientQueries)} */}
-        <h3>Review List</h3>
-        <h4>New Review</h4>
-        <ReviewForm addNewReview={this.addNewReview} />
-        {/* {reviewList(patientReviews)} */}
+        <DemographicTable />
       </div>
     )
   }
