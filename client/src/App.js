@@ -35,14 +35,23 @@ const employeePatients = (employee) => (
 )
 
 // ----------- Patient Demographics ---------------
-const getPatientDemographics = (demographic) => (
+const getPatientDemographics = (patient) => (
   <ul>
-    <li>Name: {demographic.patientName}</li>
-    <li>Age: {demographic.age}</li>
-    <li>Date of Birth: {demographic.dob}</li>
+    <li>Name: {patient.demographic.patientName}</li>
+    <li>Age: {patient.demographic.age}</li>
+    <li>Date of Birth: {patient.demographic.dob}</li>
   </ul>
 )
-
+const listPatientDemographic = (patients) => (
+  <div>
+    {patients.map(getPatientDemographics)}
+  </div>
+)
+const patientsDemographic = (employee) => (
+  <div>
+    {listPatientDemographic(employee.patients)}
+  </div>
+)
 
 
 // ----------- Patient Room Info -------------
@@ -153,7 +162,8 @@ const docs =
               type: "Review"
             }
           ]
-        }
+        },
+        
       ]
     },
     2: {
@@ -257,6 +267,7 @@ class App extends React.Component {
         <h3>Patient Info</h3>
         {employeePatients(this.getCurrentEmployee())}
         <h3>Patient Demographics</h3>
+        {patientsDemographic(this.getCurrentEmployee())}
         <DemographicTable />
       </div>
     )
