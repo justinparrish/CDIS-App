@@ -124,7 +124,7 @@ const docs =
           medicalRecNum: 'EUH694321',
           admitDate: '2020-16-02',
           lengthOfStay: 3,
-          financailClass: 'Medicare',
+          financialClass: 'Medicare',
           status: 'Discharged',
           demographic: {
             id: 1,
@@ -179,7 +179,7 @@ const docs =
           medicalRecNum: 'EUH694321',
           admitDate: '2020-16-02',
           lengthOfStay: 3,
-          financailClass: 'Medicare',
+          financialClass: 'Medicare',
           status: 'Discharged',
           demographic: {
             id: 1,
@@ -268,7 +268,7 @@ class App extends React.Component {
         {employeePatients(this.getCurrentEmployee())}
         <h3>Patient Demographics</h3>
         {patientsDemographic(this.getCurrentEmployee())}
-        <DemographicTable />
+        <DemographicTable currentEmployee={this.getCurrentEmployee()}/>
       </div>
     )
   }
