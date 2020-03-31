@@ -3,7 +3,7 @@ import './App.css';
 import PatientForm from './components/PatientForm'
 import QueryForm from './components/QueryForm';
 import ReviewForm from './components/ReviewForm'
-import { Menu, Segment, Table, Tab } from 'semantic-ui-react'
+import { Menu, Segment, Table } from 'semantic-ui-react'
 
 
 // --------- Employee ------------
@@ -32,20 +32,6 @@ const employeePatients = (employee) => (
     {listPatientInfo(employee.patients)}
   </div>
 )
-// ------------------------------------------------
-const patientTable = () => (
-  <Table celled>
-    <Table.Header>
-      <Table.Row>
-        <Table.HeaderCell>Name</Table.HeaderCell>
-        <Table.HeaderCell>Age</Table.HeaderCell>
-        <Table.HeaderCell>DOB</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
-  </Table>
-)
-
-
 
 // ----------- Patient Demographics ---------------
 const getPatientDemographics = (demographic) => (
@@ -269,7 +255,6 @@ class App extends React.Component {
         <PatientForm addNewPatient={this.addNewPatient} />
         <h3>Patient Info</h3>
         {employeePatients(this.getCurrentEmployee())}
-        
         <h3>Patient Demographics</h3>
         <h3>Query List</h3>
         <h4>New Query</h4>
