@@ -12,7 +12,7 @@ const getEmployeeName = (employee) => (
   <h4>Employee Name: {employee.name}</h4>
 )
 
-// ---------- Patient Info ----------
+// ---------- Patient Info * ----------
 const getPatientInfo = (patient) => (
   <ul>
     <li>Account Number: {patient.accountNum}</li>
@@ -34,7 +34,7 @@ const employeePatients = (employee) => (
   </div>
 )
 
-// ----------- Patient Demographics ---------------
+// ----------- Patient Demographics * ---------------
 const getPatientDemographics = (patient) => (
   <ul>
     <li>Name: {patient.demographic.patientName}</li>
