@@ -5,6 +5,7 @@ import QueryForm from './components/QueryForm';
 import ReviewForm from './components/ReviewForm'
 import { Menu, Segment, Table } from 'semantic-ui-react'
 import DemographicTable from './components/DemographicTable';
+import Routes from './components/Routes';
 
 
 // --------- Employee ------------
@@ -269,6 +270,7 @@ class App extends React.Component {
         <h3>Patient Demographics</h3>
         {patientsDemographic(this.getCurrentEmployee())}
         <DemographicTable currentEmployee={this.getCurrentEmployee()}/>
+        <Routes />
       </div>
     )
   }
