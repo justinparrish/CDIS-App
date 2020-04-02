@@ -56,14 +56,16 @@ const patientsDemographic = (employee) => (
 
 
 // ----------- Patient Room Info -------------
-const getPatientRoomInfo = (room) => (
+const getPatientRoomInfo = (patient) => (
   <ul>
-    <li>Nursing Unit: {room.nursingUnit}</li>
-    <li>Room: {room.room}</li>
-    <li>Date In: {room.datein}</li>
-    <li>Date Out: {room.dateOut}</li>
+    <li>Nursing Unit: {patient.room.nursingUnit}</li>
+    <li>Room: {patient.room.room}</li>
+    <li>Date In: {patient.room.datein}</li>
+    <li>Date Out: {patient.room.dateOut}</li>
   </ul>
 )
+
+
 
 // ------------ Patient Query -------------
 const getPatientQuery = (query) => (
@@ -111,7 +113,7 @@ const employeeList = (employees, currentEmployee, onChange) => (
 
 //List of Cars
 const patientNameOption = (patient) => (
-<option value={patient.id}>{patient.demographic.patientName}</option>
+  <option value={patient.accountNum}>{patient.demographic.patientName}</option>
 )
 
 const patientList = (patients, currentPatient, onChange) => (
@@ -253,15 +255,22 @@ class App extends React.Component {
   )
 
   getCurrentPatient = () => (
-    console.log(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient])
+    this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient]
   )
 
   setCurrentEmployee = (currentEmployee) => {
-    this.setState({ currentEmployee })
+    this.setState({ currentEmployee, currentPatient: 0 })
   }
 
-  setCurrentPatient = (currentPatient) => {
-    this.setState({ currentPatient })
+  setCurrentPatientIndex = (currentPatient) => {
+    let patients = this.state.employees[this.state.currentEmployee].patients
+
+    let index = patients.findIndex(patient => patient.accountNum === currentPatient)
+
+    console.log(index)
+
+
+    this.setState({ currentPatient: index })
   }
 
   getCurrentEmployee = () => (
@@ -271,7 +280,7 @@ class App extends React.Component {
   addNewPatient = (info) => {
     console.log("Patient From App Comp.", info)
     let employees = this.state.employees
-    
+
     let newPatientInfo = {
       id: 2,
       accountNum: info.accountNum,
@@ -298,14 +307,14 @@ class App extends React.Component {
     newPatientInfo.demographic = newDemographic
     newPatientInfo.room = newRoom
     newPatientInfo.query = []
-    newPatientInfo.review= []
+    newPatientInfo.review = []
     console.log("Demographic", newDemographic)
     console.log("Room Info", newRoom)
     console.log("Patient Info part 2", newPatientInfo)
 
     employees[this.state.currentEmployee].patients.push(newPatientInfo)
 
-    this.setState({employees})
+    this.setState({ employees })
 
   }
   // ------------------------------------------
@@ -328,12 +337,14 @@ class App extends React.Component {
         <h1>CDIS App</h1>
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
-        {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatient)}
-        {/* For List */}
-        <h3>Patient Info</h3>
-        {employeePatients(this.getCurrentEmployee())}
-        <h3>Patient Demographics</h3>
-        {patientsDemographic(this.getCurrentEmployee())}
+        {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatientIndex)}
+
+        <h3>Patient Demographic 1</h3>
+        {getPatientDemographics(this.getCurrentPatient())}
+        <h3>Patient Info 1</h3>
+        {getPatientInfo(this.getCurrentPatient())}
+        <h3>Patient Room 1</h3>
+        {getPatientRoomInfo(this.getCurrentPatient())}
         <PatientForm addNewPatient={this.addNewPatient} />
         <DemographicTable currentEmployee={this.getCurrentEmployee()} />
 
