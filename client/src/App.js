@@ -244,8 +244,7 @@ class App extends React.Component {
   // ------------------------------------------
   addNewPatient = (info) => {
     console.log("Patient From App Comp.", info)
-    let state = this.state
-
+    let employees = this.state.employees
     
     let newPatientInfo = {
       id: 2,
@@ -277,6 +276,10 @@ class App extends React.Component {
     console.log("Demographic", newDemographic)
     console.log("Room Info", newRoom)
     console.log("Patient Info part 2", newPatientInfo)
+
+    employees[this.state.currentEmployee].patients.push(newPatientInfo)
+
+    this.setState({employees})
 
   }
   // ------------------------------------------
