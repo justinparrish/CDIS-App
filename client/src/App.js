@@ -98,7 +98,7 @@ const reviewList = (list) => (
   <div>{list.map(getPatientReview)}</div>
 )
 
-//List of employees
+//List of Employees
 const employeeUsername = (employee) => (
   <option value={employee.id}>{employee.username}</option>
 )
@@ -108,6 +108,19 @@ const employeeList = (employees, currentEmployee, onChange) => (
     {employees.map(employeeUsername)}
   </select>
 )
+
+//List of Cars
+const patientNameOption = (patient) => (
+<option value={patient.id}>{patient.demographic.patientName}</option>
+)
+
+const patientList = (patients, currentPatient, onChange) => (
+  <select value={currentPatient} onChange={(evnt) => onChange(evnt.target.value)}>
+    <option value={undefined}>Select Patient</option>
+    {patients.map(patientNameOption)}
+  </select>
+)
+
 
 // ----------- Test Data Structure --------------
 const docs =
@@ -227,15 +240,28 @@ const docs =
 class App extends React.Component {
   state = {
     employees: docs,
-    currentEmployee: 1
+    currentEmployee: 1,
+    currentPatient: 0
   }
 
   getAllEmployees = () => (
     Object.values(this.state.employees)
   )
 
+  getAllEmployeePatients = () => (
+    Object.values(this.state.employees[this.state.currentEmployee].patients)
+  )
+
+  getCurrentPatient = () => (
+    console.log(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient])
+  )
+
   setCurrentEmployee = (currentEmployee) => {
     this.setState({ currentEmployee })
+  }
+
+  setCurrentPatient = (currentPatient) => {
+    this.setState({ currentPatient })
   }
 
   getCurrentEmployee = () => (
@@ -298,10 +324,11 @@ class App extends React.Component {
   render() {
     return (
       <div class="container">
-        <button onClick={this.getCurrentEmployee}>Current Employee</button>
+        <button onClick={this.getCurrentPatient}>Current Employee</button>
         <h1>CDIS App</h1>
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
+        {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatient)}
         {/* For List */}
         <h3>Patient Info</h3>
         {employeePatients(this.getCurrentEmployee())}
