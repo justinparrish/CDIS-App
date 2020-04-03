@@ -345,6 +345,7 @@ class App extends React.Component {
         {getPatientInfo(this.getCurrentPatient())}
         <h3>Patient Room 1</h3>
         {getPatientRoomInfo(this.getCurrentPatient())}
+        <h3>Patient Query 1</h3>
         <PatientForm addNewPatient={this.addNewPatient} />
         <DemographicTable currentEmployee={this.getCurrentEmployee()} />
 
