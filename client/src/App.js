@@ -218,6 +218,8 @@ const docs =
             clinicalIndicators: "Pt ted with Hypercapnia Respitory Failure with ALS",
             historyAndPhysical: "ory and physical 1",
             treatment: "3rmal Saline 60ml Tube flush given x 6",
+            // status: open or closed,
+            // numberOfOpen: Number
           }
         ],
         review: [
@@ -324,8 +326,8 @@ class App extends React.Component {
     let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].query.length + 1
 
     let newQuery = {
-      id : nextQueryId,
-      doctorName : info.doctorName,
+      id: nextQueryId,
+      doctorName: info.doctorName,
       doctorQuestion: info.doctorQuestion,
       clinicalIndicators: info.clinicalIndicators,
       historyAndPhysical: info.historyAndPhysical,
@@ -337,7 +339,7 @@ class App extends React.Component {
     console.log("New Query", newQuery)
     console.log(nextQueryId)
 
-    this.setState({employees})
+    this.setState({ employees })
   }
   addNewReview = (info) => {
     let employees = this.state.employees
@@ -345,7 +347,7 @@ class App extends React.Component {
     let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].review.length + 1
 
     let newReview = {
-      id : nextQueryId,
+      id: nextQueryId,
       ep: info.ep,
       vitalSigns: info.vitalSigns,
       diagnostic: info.diagnostic,
@@ -358,15 +360,16 @@ class App extends React.Component {
 
     employees[this.state.currentEmployee].patients[this.state.currentPatient].review.push(newReview)
 
-    console.log("New Review",newReview)
+    console.log("New Review", newReview)
     console.log(nextQueryId)
 
-    this.setState({employees})
+    this.setState({ employees })
   }
   render() {
     return (
       <div class="container">
         <button onClick={this.getCurrentPatient}>Current Employee</button>
+        <DemographicTable currentEmployee={this.getCurrentEmployee()} />
         <h1>CDIS App</h1>
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
@@ -384,11 +387,9 @@ class App extends React.Component {
         <br /><hr /><br />
         <h3>Patient Review 1</h3>
         {reviewList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review)}
-        <ReviewForm addNewReview={this.addNewReview}/>
+        <ReviewForm addNewReview={this.addNewReview} />
         <br /><hr /><br />
         <PatientForm addNewPatient={this.addNewPatient} />
-        <DemographicTable currentEmployee={this.getCurrentEmployee()} />
-
       </div>
     )
   }

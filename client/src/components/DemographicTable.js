@@ -34,6 +34,7 @@ export default class DemographicTable extends Component {
                             <Table.HeaderCell>Financial Class</Table.HeaderCell>
                             <Table.HeaderCell>Name</Table.HeaderCell>
                             <Table.HeaderCell>Age</Table.HeaderCell>
+                            {/* vvvvv Change for number of open Queries vvvv */}
                             <Table.HeaderCell>DOB</Table.HeaderCell>
                             <Table.HeaderCell>Status</Table.HeaderCell>
                             <Table.HeaderCell>View</Table.HeaderCell>
