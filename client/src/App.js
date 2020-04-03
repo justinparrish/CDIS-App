@@ -320,9 +320,7 @@ class App extends React.Component {
   // ------------------------------------------
   addNewQuery = (info) => {
     console.log("Query From App Comp.", info)
-    let state = { ...this.state }
-    state.queries.push(info)
-    this.setState(state)
+
   }
   addNewReview = (info) => {
     console.log("Review From App Comp.", info)
@@ -346,6 +344,9 @@ class App extends React.Component {
         <h3>Patient Room 1</h3>
         {getPatientRoomInfo(this.getCurrentPatient())}
         <h3>Patient Query 1</h3>
+
+        <QueryForm addNewQuery={this.addNewQuery} />
+        <br /><hr /><br />
         <PatientForm addNewPatient={this.addNewPatient} />
         <DemographicTable currentEmployee={this.getCurrentEmployee()} />
 
