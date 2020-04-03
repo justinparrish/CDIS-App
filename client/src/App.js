@@ -340,10 +340,28 @@ class App extends React.Component {
     this.setState({employees})
   }
   addNewReview = (info) => {
-    console.log("Review From App Comp.", info)
-    let state = { ...this.state }
-    state.review.push(info)
-    this.setState(state)
+    let employees = this.state.employees
+
+    let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].review.length + 1
+
+    let newReview = {
+      id : nextQueryId,
+      ep: info.ep,
+      vitalSigns: info.vitalSigns,
+      diagnostic: info.diagnostic,
+      mar: info.mar,
+      historyAndPhysical: info.historyAndPhysical,
+      queryOpp: info.queryOpp,
+      labs: info.labs,
+      type: info.type
+    }
+
+    employees[this.state.currentEmployee].patients[this.state.currentPatient].review.push(newReview)
+
+    console.log("New Review",newReview)
+    console.log(nextQueryId)
+
+    this.setState({employees})
   }
   render() {
     return (
@@ -363,6 +381,10 @@ class App extends React.Component {
         <h3>Patient Query 1</h3>
         {queryList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query)}
         <QueryForm addNewQuery={this.addNewQuery} />
+        <br /><hr /><br />
+        <h3>Patient Review 1</h3>
+        {reviewList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review)}
+        <ReviewForm addNewReview={this.addNewReview}/>
         <br /><hr /><br />
         <PatientForm addNewPatient={this.addNewPatient} />
         <DemographicTable currentEmployee={this.getCurrentEmployee()} />
