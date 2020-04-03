@@ -344,7 +344,7 @@ class App extends React.Component {
         <h3>Patient Room 1</h3>
         {getPatientRoomInfo(this.getCurrentPatient())}
         <h3>Patient Query 1</h3>
-
+        {queryList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query)}
         <QueryForm addNewQuery={this.addNewQuery} />
         <br /><hr /><br />
         <PatientForm addNewPatient={this.addNewPatient} />
