@@ -319,8 +319,25 @@ class App extends React.Component {
   }
   // ------------------------------------------
   addNewQuery = (info) => {
-    console.log("Query From App Comp.", info)
+    let employees = this.state.employees
 
+    let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].query.length + 1
+
+    let newQuery = {
+      id : nextQueryId,
+      doctorName : info.doctorName,
+      doctorQuestion: info.doctorQuestion,
+      clinicalIndicators: info.clinicalIndicators,
+      historyAndPhysical: info.historyAndPhysical,
+      treatment: info.treatment
+    }
+
+    employees[this.state.currentEmployee].patients[this.state.currentPatient].query.push(newQuery)
+
+    console.log("New Query", newQuery)
+    console.log(nextQueryId)
+
+    this.setState({employees})
   }
   addNewReview = (info) => {
     console.log("Review From App Comp.", info)
