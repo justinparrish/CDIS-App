@@ -6,6 +6,7 @@ import ReviewForm from './components/ReviewForm'
 import { Menu, Segment, Table } from 'semantic-ui-react'
 import DemographicTable from './components/DemographicTable';
 import Routes from './components/Routes';
+import LoginForm from './components/LoginForm';
 
 
 // --------- Employee ------------
@@ -368,6 +369,7 @@ class App extends React.Component {
   render() {
     return (
       <div class="container">
+        <LoginForm />
         <button onClick={this.getCurrentPatient}>Current Employee</button>
         <DemographicTable currentEmployee={this.getCurrentEmployee()} />
         <h1>CDIS App</h1>
