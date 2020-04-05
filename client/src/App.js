@@ -366,10 +366,15 @@ class App extends React.Component {
 
     this.setState({ employees })
   }
+
+  authenicate = (credentials) => {
+    console.log(credentials)
+  }
+
   render() {
     return (
       <div class="container">
-        <LoginForm />
+        <LoginForm authenicate={this.authenicate}/>
         <button onClick={this.getCurrentPatient}>Current Employee</button>
         <DemographicTable currentEmployee={this.getCurrentEmployee()} />
         <h1>CDIS App</h1>
