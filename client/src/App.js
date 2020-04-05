@@ -369,6 +369,8 @@ class App extends React.Component {
 
   authenicate = (credentials) => {
     console.log(credentials)
+    let username = credentials.username
+    let password = credentials.password
   }
 
   render() {
