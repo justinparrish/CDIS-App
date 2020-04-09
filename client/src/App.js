@@ -7,6 +7,7 @@ import { Menu, Segment, Table } from 'semantic-ui-react'
 import DemographicTable from './components/DemographicTable';
 import Routes from './components/Routes';
 import LoginForm from './components/LoginForm';
+import Tabs from './components/Tabs'
 
 
 // --------- Employee ------------
@@ -376,6 +377,7 @@ class App extends React.Component {
   render() {
     return (
       <div class="container">
+        <Tabs />
         <LoginForm authenicate={this.authenicate}/>
         <button onClick={this.getCurrentPatient}>Current Employee</button>
         <DemographicTable currentEmployee={this.getCurrentEmployee()} />
