@@ -377,30 +377,23 @@ class App extends React.Component {
   render() {
     return (
       <div class="container">
-        <Tabs 
-        employeeName={getEmployeeName(this.getCurrentEmployee())}
-        currentEmployee={this.getCurrentEmployee()}
-        rForm={<ReviewForm addNewReview={this.addNewReview} />}
-        reviews={reviewList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review)}
-        queries={queryList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query)}
-        />
-        
-        <LoginForm authenicate={this.authenicate}/>
         <h1>CDIS App</h1>
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
         {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatientIndex)}
-
-        <h3>Patient Demographic 1</h3>
-        {getPatientDemographics(this.getCurrentPatient())}
-        <h3>Patient Info 1</h3>
-        {getPatientInfo(this.getCurrentPatient())}
-        <h3>Patient Room 1</h3>
-        {getPatientRoomInfo(this.getCurrentPatient())}
-        <h3>Patient Query 1</h3>
-        <QueryForm addNewQuery={this.addNewQuery} />
-        <br /><hr /><br />
-        <PatientForm addNewPatient={this.addNewPatient} />
+        <Tabs 
+        employeeName={getEmployeeName(this.getCurrentEmployee())}
+        currentEmployee={this.getCurrentEmployee()}
+        pForm={<PatientForm addNewPatient={this.addNewPatient} />}
+        rForm={<ReviewForm addNewReview={this.addNewReview} />}
+        qForm={<QueryForm addNewQuery={this.addNewQuery} />}
+        patientInfo={getPatientInfo(this.getCurrentPatient())}
+        demographic={getPatientDemographics(this.getCurrentPatient())}
+        roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
+        reviews={reviewList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review)}
+        queries={queryList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query)}
+        />
+        {/* <LoginForm authenicate={this.authenicate}/> */}
       </div>
     )
   }

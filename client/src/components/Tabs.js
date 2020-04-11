@@ -13,7 +13,21 @@ const panes = [
         )
     },
     {
-        menuItem: { key: 'reviews', icon: 'users', content: 'Reviews' },
+        menuItem: { key: 'patient', icon: 'address card', content: 'Patient' },
+        render: (props) => (
+            <Tab.Pane>
+                {props.pForm}
+                <h1>Info</h1>
+                {props.patientInfo}
+                <h1>Demographic</h1>
+                {props.demographic}
+                <h1>Room Info</h1>
+                {props.roomInfo}
+            </Tab.Pane>
+        )
+    },
+    {
+        menuItem: { key: 'reviews', icon: 'stethoscope', content: 'Reviews' },
         render: (props) => (
             <Tab.Pane>
                 {props.employeeName}
@@ -23,10 +37,11 @@ const panes = [
         )
     },
     {
-        menuItem: { key: 'queries', icon: 'users', content: 'Queries' },
+        menuItem: { key: 'queries', icon: 'pills', content: 'Queries' },
         render: (props) => (
             <Tab.Pane>
                 {props.employeeName}
+                {props.qForm}
                 {props.queries}
             </Tab.Pane>
         )
@@ -41,7 +56,12 @@ export default class Tabs extends Component {
                     panes={panes}
                     employeeName={this.props.employeeName}
                     chart={<DemographicTable currentEmployee={this.props.currentEmployee} />}
+                    pForm={this.props.pForm}
                     rForm={this.props.rForm}
+                    qForm={this.props.qForm}
+                    patientInfo={this.props.patientInfo}
+                    roomInfo={this.props.roomInfo}
+                    demographic={this.props.demographic}
                     reviews={this.props.reviews}
                     queries={this.props.queries}
                 />
