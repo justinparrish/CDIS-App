@@ -377,7 +377,7 @@ class App extends React.Component {
   render() {
     return (
       <div class="container">
-        <Tabs />
+        <Tabs currentEmployee={this.getCurrentEmployee()}/>
         <LoginForm authenicate={this.authenicate}/>
         <button onClick={this.getCurrentPatient}>Current Employee</button>
         <DemographicTable currentEmployee={this.getCurrentEmployee()} />
