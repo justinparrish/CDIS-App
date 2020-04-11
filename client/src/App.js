@@ -380,6 +380,7 @@ class App extends React.Component {
         <Tabs 
         employeeName={getEmployeeName(this.getCurrentEmployee())}
         currentEmployee={this.getCurrentEmployee()}
+        rForm={<ReviewForm addNewReview={this.addNewReview} />}
         reviews={reviewList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review)}
         queries={queryList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query)}
         />
@@ -398,9 +399,6 @@ class App extends React.Component {
         {getPatientRoomInfo(this.getCurrentPatient())}
         <h3>Patient Query 1</h3>
         <QueryForm addNewQuery={this.addNewQuery} />
-        <br /><hr /><br />
-        <h3>Patient Review 1</h3>
-        <ReviewForm addNewReview={this.addNewReview} />
         <br /><hr /><br />
         <PatientForm addNewPatient={this.addNewPatient} />
       </div>

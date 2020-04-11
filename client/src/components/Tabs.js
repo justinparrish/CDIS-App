@@ -17,6 +17,7 @@ const panes = [
         render: (props) => (
             <Tab.Pane>
                 {props.employeeName}
+                {props.rForm}
                 {props.reviews}
             </Tab.Pane>
         )
@@ -40,6 +41,7 @@ export default class Tabs extends Component {
                     panes={panes}
                     employeeName={this.props.employeeName}
                     chart={<DemographicTable currentEmployee={this.props.currentEmployee} />}
+                    rForm={this.props.rForm}
                     reviews={this.props.reviews}
                     queries={this.props.queries}
                 />
