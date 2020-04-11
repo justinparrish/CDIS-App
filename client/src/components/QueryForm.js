@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Form } from 'semantic-ui-react'
 
 export default class QueryForm extends Component {
     state = {
@@ -24,21 +25,20 @@ export default class QueryForm extends Component {
     }
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <fieldset>
-                    <label>Doctor Name</label>
-                    <input type='text' name='doctorName' placeholder='Doe, John D., NP' onChange={this.handleInputs} />
-                    <label>Doctor Question</label>
-                    <input type='text' name='doctorQuestion' placeholder="1,000 Words Max" onChange={this.handleInputs} />
-                    <label>Clinical Indicators</label>
-                    <input type='text' name='clinicalIndicators' placeholder='1,000 Words Max' onChange={this.handleInputs} />
-                    <label>H&P</label>
-                    <input type='text' name='historyAndPhysical' placeholder='1,000 Words Max' onChange={this.handleInputs} />
-                    <label>Treatment</label>
-                    <input type='text' name='treatment' placeholder='1,000 Words Max' onChange={this.handleInputs} />
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Group widths='equal'>
+                    <Form.Input fluid label='Doctor Name' type='text' name='doctorName' placeholder='Doe, John D., NP' onChange={this.handleInputs} />
+                    <Form.Input fluid label='Doctor Question' type='text' name='doctorQuestion' placeholder="1,000 Words Max" onChange={this.handleInputs} />
+                </Form.Group>
+                <Form.Group widths='equal'>
+                    <Form.Input fluid label='Clinical Indicators' type='text' name='clinicalIndicators' placeholder='1,000 Words Max' onChange={this.handleInputs} />
+                    <Form.Input fluid label='H&P' type='text' name='historyAndPhysical' placeholder='1,000 Words Max' onChange={this.handleInputs} />
+                    <Form.Input fluid label='Treatment' type='text' name='treatment' placeholder='1,000 Words Max' onChange={this.handleInputs} />
+                </Form.Group>
+                <Form.Group>
                     <input type='submit' value='Add' />
-                </fieldset>
-            </form>
+                </Form.Group>
+            </Form>
         )
     }
 }
