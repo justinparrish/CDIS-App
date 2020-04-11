@@ -377,10 +377,14 @@ class App extends React.Component {
   render() {
     return (
       <div class="container">
-        <Tabs currentEmployee={this.getCurrentEmployee()}/>
+        <Tabs 
+        employeeName={getEmployeeName(this.getCurrentEmployee())}
+        currentEmployee={this.getCurrentEmployee()}
+        reviews={reviewList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review)}
+        queries={queryList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query)}
+        />
+        
         <LoginForm authenicate={this.authenicate}/>
-        <button onClick={this.getCurrentPatient}>Current Employee</button>
-        <DemographicTable currentEmployee={this.getCurrentEmployee()} />
         <h1>CDIS App</h1>
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
@@ -393,11 +397,9 @@ class App extends React.Component {
         <h3>Patient Room 1</h3>
         {getPatientRoomInfo(this.getCurrentPatient())}
         <h3>Patient Query 1</h3>
-        {queryList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query)}
         <QueryForm addNewQuery={this.addNewQuery} />
         <br /><hr /><br />
         <h3>Patient Review 1</h3>
-        {reviewList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review)}
         <ReviewForm addNewReview={this.addNewReview} />
         <br /><hr /><br />
         <PatientForm addNewPatient={this.addNewPatient} />
