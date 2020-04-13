@@ -9,7 +9,7 @@ body {
   background: white;
   margin: 40px;
   padding: 20px;
-  /* border: 2.33px dotted black; */
+  border: 3.50px solid white;
   border-radius: 10px;
   height: 700px;
   overflow: scroll;
