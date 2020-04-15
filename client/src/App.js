@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import PatientForm from './components/PatientForm'
-import QueryForm from './components/QueryForm';
-import ReviewForm from './components/ReviewForm'
+import PatientForm from './components/forms/PatientForm'
+import QueryForm from './components/forms/QueryForm';
+import ReviewForm from './components/forms/ReviewForm'
 import { Menu, Segment, Table } from 'semantic-ui-react'
 import DemographicTable from './components/DemographicTable';
 import Routes from './components/Routes';
-import LoginForm from './components/LoginForm';
+import LoginForm from './components/forms/LoginForm';
 import Tabs from './components/Tabs'
 
 
