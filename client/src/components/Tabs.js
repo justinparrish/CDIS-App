@@ -3,6 +3,7 @@ import { Label, Menu, Tab } from 'semantic-ui-react'
 import DemographicTable from './DemographicTable'
 import PatientInfoAccordion from './accordions/PatientInfoAccordion'
 import ReviewCards from './cards/ReviewCards'
+import QueryCard from './cards/QueryCards'
 
 const panes = [
     {
@@ -30,7 +31,7 @@ const panes = [
             <Tab.Pane>
                 {props.employeeName}
                 {props.rForm}
-            <h2>Patient Name: {props.patientName}</h2>
+                <h2>Patient Name: {props.patientName}</h2>
                 {props.reviewCards}
             </Tab.Pane>
         )
@@ -41,7 +42,8 @@ const panes = [
             <Tab.Pane>
                 {props.employeeName}
                 {props.qForm}
-                {props.queries}
+                <h2>Patient Name: {props.patientName}</h2>
+                {props.queryCards}
             </Tab.Pane>
         )
     }
@@ -54,18 +56,19 @@ export default class Tabs extends Component {
                 <Tab
                     panes={panes}
                     employeeName={this.props.employeeName}
-                    chart={<DemographicTable currentEmployee={this.props.currentEmployee} />}
                     pForm={this.props.pForm}
                     rForm={this.props.rForm}
                     qForm={this.props.qForm}
                     reviews={this.props.reviews}
                     queries={this.props.queries}
-                    patientAccordion={<PatientInfoAccordion 
-                                            info={this.props.info}
-                                            roomInfo={this.props.roomInfo}
-                                            demographics={this.props.demographics} />}
-                    reviewCards={<ReviewCards reviews={this.props.reviews} />}
                     patientName={this.props.patientName}
+                    chart={<DemographicTable currentEmployee={this.props.currentEmployee} />}
+                    patientAccordion={<PatientInfoAccordion
+                        info={this.props.info}
+                        roomInfo={this.props.roomInfo}
+                        demographics={this.props.demographics} />}
+                        reviewCards={<ReviewCards reviews={this.props.reviews} />}
+                        queryCards={<QueryCard queries={this.props.queries} />}
                 />
             </div>
         )
