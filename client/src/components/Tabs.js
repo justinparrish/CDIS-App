@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Label, Menu, Tab } from 'semantic-ui-react'
 import DemographicTable from './DemographicTable'
+import PatientInfoAccordion from './accordions/PatientInfoAccordion'
 
 const panes = [
     {
@@ -17,12 +18,8 @@ const panes = [
         render: (props) => (
             <Tab.Pane>
                 {props.pForm}
-                <h1>Info</h1>
-                {props.patientInfo}
-                <h1>Demographic</h1>
-                {props.demographic}
-                <h1>Room Info</h1>
-                {props.roomInfo}
+                <h1>Patient's Info</h1>
+                {props.patientAccordion}
             </Tab.Pane>
         )
     },
@@ -59,11 +56,12 @@ export default class Tabs extends Component {
                     pForm={this.props.pForm}
                     rForm={this.props.rForm}
                     qForm={this.props.qForm}
-                    patientInfo={this.props.patientInfo}
-                    roomInfo={this.props.roomInfo}
-                    demographic={this.props.demographic}
                     reviews={this.props.reviews}
                     queries={this.props.queries}
+                    patientAccordion={<PatientInfoAccordion 
+                                            info={this.props.info}
+                                            roomInfo={this.props.roomInfo}
+                                            demographics={this.props.demographics} />}
                 />
             </div>
         )

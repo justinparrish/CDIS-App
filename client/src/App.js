@@ -8,6 +8,7 @@ import DemographicTable from './components/DemographicTable';
 import Routes from './components/Routes';
 import LoginForm from './components/forms/LoginForm';
 import Tabs from './components/Tabs'
+import PatientInfoAccordion from './components/accordions/PatientInfoAccordion'
 
 
 // --------- Employee ------------
@@ -392,7 +393,12 @@ class App extends React.Component {
         roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
         reviews={reviewList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review)}
         queries={queryList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query)}
+        info={getPatientInfo(this.getCurrentPatient())}
+        roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
+        demographics={getPatientDemographics(this.getCurrentPatient())}
+
         />
+        
         {/* <LoginForm authenicate={this.authenicate}/> */}
       </div>
     )
