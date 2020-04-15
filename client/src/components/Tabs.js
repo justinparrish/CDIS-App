@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Label, Menu, Tab } from 'semantic-ui-react'
+import { Tab } from 'semantic-ui-react'
 import DemographicTable from './DemographicTable'
 import PatientInfoAccordion from './accordions/PatientInfoAccordion'
 import ReviewCards from './cards/ReviewCards'
@@ -59,16 +59,14 @@ export default class Tabs extends Component {
                     pForm={this.props.pForm}
                     rForm={this.props.rForm}
                     qForm={this.props.qForm}
-                    reviews={this.props.reviews}
-                    queries={this.props.queries}
                     patientName={this.props.patientName}
                     chart={<DemographicTable currentEmployee={this.props.currentEmployee} />}
+                    reviewCards={<ReviewCards reviews={this.props.reviews} />}
+                    queryCards={<QueryCard queries={this.props.queries} />}
                     patientAccordion={<PatientInfoAccordion
                         info={this.props.info}
                         roomInfo={this.props.roomInfo}
                         demographics={this.props.demographics} />}
-                        reviewCards={<ReviewCards reviews={this.props.reviews} />}
-                        queryCards={<QueryCard queries={this.props.queries} />}
                 />
             </div>
         )
