@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Label, Menu, Tab } from 'semantic-ui-react'
 import DemographicTable from './DemographicTable'
 import PatientInfoAccordion from './accordions/PatientInfoAccordion'
+import ReviewCards from './cards/ReviewCards'
 
 const panes = [
     {
@@ -29,7 +30,8 @@ const panes = [
             <Tab.Pane>
                 {props.employeeName}
                 {props.rForm}
-                {props.reviews}
+            <h2>Patient Name: {props.patientName}</h2>
+                {props.reviewCards}
             </Tab.Pane>
         )
     },
@@ -62,6 +64,8 @@ export default class Tabs extends Component {
                                             info={this.props.info}
                                             roomInfo={this.props.roomInfo}
                                             demographics={this.props.demographics} />}
+                    reviewCards={<ReviewCards reviews={this.props.reviews} />}
+                    patientName={this.props.patientName}
                 />
             </div>
         )

@@ -6,7 +6,7 @@ import ReviewForm from './components/forms/ReviewForm'
 import { Menu, Segment, Table } from 'semantic-ui-react'
 import DemographicTable from './components/DemographicTable';
 import Routes from './components/Routes';
-import LoginForm from './components/forms/LoginForm';
+import ReviewCards from './components/cards/ReviewCards';
 import Tabs from './components/Tabs'
 
 
@@ -382,6 +382,7 @@ class App extends React.Component {
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
         {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatientIndex)}
+        <ReviewCards reviews={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review} />
         <Tabs 
         employeeName={getEmployeeName(this.getCurrentEmployee())}
         currentEmployee={this.getCurrentEmployee()}
@@ -391,11 +392,12 @@ class App extends React.Component {
         patientInfo={getPatientInfo(this.getCurrentPatient())}
         demographic={getPatientDemographics(this.getCurrentPatient())}
         roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
-        reviews={reviewList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review)}
+        reviews={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review}
         queries={queryList(this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query)}
         info={getPatientInfo(this.getCurrentPatient())}
         roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
         demographics={getPatientDemographics(this.getCurrentPatient())}
+        patientName={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patientName}
 
         />
         
