@@ -34,10 +34,10 @@ export default class PatientForm extends Component {
     }
     render() {
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit} style={{margin: '40px', color: 'white'}}>
                 <Form.Group widths='equal'>
                     <Form.Input fluid label='Accont Number' type='text' name='accountNum' placeholder='Enter Account #' onChange={this.handleInputs} />
-                    <Form.Input fluid label='Medical Record Number' type='text' name='medicalRecNum' placeholder='Enter Medical Record #' onChange={this.handleInputs} />
+                    <Form.Input fluid label='Medical Record #' type='text' name='medicalRecNum' placeholder='Enter Medical Record #' onChange={this.handleInputs} />
                     <Form.Input fluid label='Admit Date' type='date' name='admitDate' placeholder='When Admitted?' onChange={this.handleInputs} />
                     <Form.Input fluid label='Length of Stay' type='number' name='lengthOfStay' placeholder='How Long was the stay?' onChange={this.handleInputs} />
                     <Form.Input fluid label='Financial Class' type='text' name='financialClass' placeholder='Medicaid, Medicare, etc.' onChange={this.handleInputs} />

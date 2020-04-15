@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tab } from 'semantic-ui-react'
+import { Tab, Modal, Button } from 'semantic-ui-react'
 import DemographicTable from './DemographicTable'
 import PatientInfoAccordion from './accordions/PatientInfoAccordion'
 import ReviewCards from './cards/ReviewCards'
@@ -19,7 +19,14 @@ const panes = [
         menuItem: { key: 'patient', icon: 'address card', content: 'Patient' },
         render: (props) => (
             <Tab.Pane>
+                <Modal trigger={<Button>Add New Patient</Button>} size='fullscreen'>
+                    <Modal.Header>Enter New Patient Info</Modal.Header>
+                <Modal.Content>
+                <Modal.Description>
                 {props.pForm}
+                </Modal.Description>
+                </Modal.Content>
+                </Modal>
                 <h1>Patient's Info</h1>
                 {props.patientAccordion}
             </Tab.Pane>
