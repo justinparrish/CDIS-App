@@ -8,7 +8,7 @@ import DemographicTable from './components/DemographicTable';
 import Routes from './components/Routes';
 import LoginForm from './components/forms/LoginForm';
 import Tabs from './components/Tabs'
-import PatientInfoAccordion from './components/accordions/PatientInfoAccordion'
+
 
 
 // --------- Employee ------------
