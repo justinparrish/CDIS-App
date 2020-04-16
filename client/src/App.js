@@ -239,6 +239,7 @@ const docs =
   }
 }
 
+// -------------- Using Fetch to GET data from Django server ----------------
 
 class App extends React.Component {
   state = {
@@ -378,24 +379,24 @@ class App extends React.Component {
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
         {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatientIndex)}
-        <Tabs 
-        employeeName={getEmployeeName(this.getCurrentEmployee())}
-        currentEmployee={this.getCurrentEmployee()}
-        pForm={<PatientForm addNewPatient={this.addNewPatient} />}
-        rForm={<ReviewForm addNewReview={this.addNewReview} />}
-        qForm={<QueryForm addNewQuery={this.addNewQuery} />}
-        patientInfo={getPatientInfo(this.getCurrentPatient())}
-        demographic={getPatientDemographics(this.getCurrentPatient())}
-        roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
-        reviews={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review}
-        queries={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query}
-        info={getPatientInfo(this.getCurrentPatient())}
-        roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
-        demographics={getPatientDemographics(this.getCurrentPatient())}
-        patientName={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patientName}
+        <Tabs
+          employeeName={getEmployeeName(this.getCurrentEmployee())}
+          currentEmployee={this.getCurrentEmployee()}
+          pForm={<PatientForm addNewPatient={this.addNewPatient} />}
+          rForm={<ReviewForm addNewReview={this.addNewReview} />}
+          qForm={<QueryForm addNewQuery={this.addNewQuery} />}
+          patientInfo={getPatientInfo(this.getCurrentPatient())}
+          demographic={getPatientDemographics(this.getCurrentPatient())}
+          roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
+          reviews={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review}
+          queries={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query}
+          info={getPatientInfo(this.getCurrentPatient())}
+          roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
+          demographics={getPatientDemographics(this.getCurrentPatient())}
+          patientName={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patientName}
 
         />
-        
+
         {/* <LoginForm authenicate={this.authenicate}/> */}
       </div>
     )
