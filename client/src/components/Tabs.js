@@ -10,7 +10,7 @@ const panes = [
         menuItem: { key: 'patients', icon: 'users', content: 'Patients' },
         render: (props) => (
             <Tab.Pane>
-                {props.employeeName}
+                {props.employeename}
                 {props.chart}
             </Tab.Pane>
         )
@@ -23,12 +23,12 @@ const panes = [
                     <Modal.Header>Enter New Patient Info</Modal.Header>
                 <Modal.Content>
                 <Modal.Description>
-                {props.pForm}
+                {props.pform}
                 </Modal.Description>
                 </Modal.Content>
                 </Modal>
                 <h1>Patient's Info</h1>
-                {props.patientAccordion}
+                {props.patientaccordion}
             </Tab.Pane>
         )
     },
@@ -36,10 +36,10 @@ const panes = [
         menuItem: { key: 'reviews', icon: 'stethoscope', content: 'Reviews' },
         render: (props) => (
             <Tab.Pane>
-                {props.employeeName}
-                {props.rForm}
-                <h2>Patient Name: {props.patientName}</h2>
-                {props.reviewCards}
+                {props.employeename}
+                {props.rform}
+                <h2>Patient Name: {props.patientname}</h2>
+                {props.reviewcards}
             </Tab.Pane>
         )
     },
@@ -47,10 +47,10 @@ const panes = [
         menuItem: { key: 'queries', icon: 'pills', content: 'Queries' },
         render: (props) => (
             <Tab.Pane>
-                {props.employeeName}
-                {props.qForm}
-                <h2>Patient Name: {props.patientName}</h2>
-                {props.queryCards}
+                {props.employeename}
+                {props.qform}
+                <h2>Patient Name: {props.patientname}</h2>
+                {props.querycards}
             </Tab.Pane>
         )
     }
@@ -62,15 +62,15 @@ export default class Tabs extends Component {
             <div>
                 <Tab
                     panes={panes}
-                    employeeName={this.props.employeeName}
-                    pForm={this.props.pForm}
-                    rForm={this.props.rForm}
-                    qForm={this.props.qForm}
-                    patientName={this.props.patientName}
+                    employeename={this.props.employeename}
+                    pform={this.props.pform}
+                    rform={this.props.rform}
+                    qform={this.props.qform}
+                    patientname={this.props.patientname}
                     chart={<DemographicTable currentEmployee={this.props.currentEmployee} />}
-                    reviewCards={<ReviewCards reviews={this.props.reviews} />}
-                    queryCards={<QueryCard queries={this.props.queries} />}
-                    patientAccordion={<PatientInfoAccordion
+                    reviewcards={<ReviewCards reviews={this.props.reviews} />}
+                    querycards={<QueryCard queries={this.props.queries} />}
+                    patientaccordion={<PatientInfoAccordion
                         info={this.props.info}
                         roomInfo={this.props.roomInfo}
                         demographics={this.props.demographics} />}

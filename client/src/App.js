@@ -240,6 +240,11 @@ const docs =
 }
 
 // -------------- Using Fetch to GET data from Django server ----------------
+const getEmployeesFromServer = () => (
+  fetch('/api/employee/')
+    .then(res => res.json())
+)
+
 
 class App extends React.Component {
   state = {
@@ -247,6 +252,14 @@ class App extends React.Component {
     currentEmployee: 1,
     currentPatient: 0
   }
+
+  // componentDidMount = () => (
+  //   getEmployeesFromServer()
+  //     .then(employees => {
+  //       this.setState({employers: employees})
+  //       console.log(this.state)
+  //     })
+  // )
 
   getAllEmployees = () => (
     Object.values(this.state.employees)
@@ -374,17 +387,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <h1>CDIS App</h1>
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
         {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatientIndex)}
         <Tabs
-          employeeName={getEmployeeName(this.getCurrentEmployee())}
+          employeename={getEmployeeName(this.getCurrentEmployee())}
           currentEmployee={this.getCurrentEmployee()}
-          pForm={<PatientForm addNewPatient={this.addNewPatient} />}
-          rForm={<ReviewForm addNewReview={this.addNewReview} />}
-          qForm={<QueryForm addNewQuery={this.addNewQuery} />}
+          pform={<PatientForm addNewPatient={this.addNewPatient} />}
+          rform={<ReviewForm addNewReview={this.addNewReview} />}
+          qform={<QueryForm addNewQuery={this.addNewQuery} />}
           patientInfo={getPatientInfo(this.getCurrentPatient())}
           demographic={getPatientDemographics(this.getCurrentPatient())}
           roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
@@ -393,7 +406,7 @@ class App extends React.Component {
           info={getPatientInfo(this.getCurrentPatient())}
           roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
           demographics={getPatientDemographics(this.getCurrentPatient())}
-          patientName={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patientName}
+          patientname={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patientName}
 
         />
 
