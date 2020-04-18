@@ -38,7 +38,7 @@ export default class QueryForm extends Component {
                     <Form.Input fluid label='Treatment' type='text' name='treatment' placeholder='1,000 Words Max' onChange={this.handleInputs} />
                 </Form.Group>
                 <Form.Group widths='equal'>
-                    <Form.Input fluid label='Status' type='text' name='status' placeholder='1,000 Words Max' onChange={this.handleInputs} />
+                    <Form.Input fluid label='Status' type='text' name='status' placeholder='Open or Closed' onChange={this.handleInputs} />
                     <Form.Input fluid label='Date' type='date' name='created_on' placeholder="Today's Date" onChange={this.handleInputs} />
                 </Form.Group>
                 <Form.Group>
