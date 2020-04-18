@@ -117,7 +117,7 @@ const patientNameOption = (patient) => (
 
 const patientList = (patients, currentPatient, onChange) => (
   <select value={currentPatient} onChange={(evnt) => onChange(evnt.target.value)}>
-    <option value={undefined}>Select Patient</option>
+    {/* <option value={undefined}>Select Patient</option> */}
     {patients.map(patientNameOption)}
   </select>
 )
@@ -253,6 +253,31 @@ const getEmployeesFromServer = () => (
     .then(res => res.json())
 )
 
+const getPatientsFromServer = () => (
+  fetch('/api/patient/')
+    .then(res => res.json())
+)
+
+const getDemographicsFromServer = () => (
+  fetch('/api/demographic/')
+    .then(res => res.json())
+)
+
+const getRoomsFromServer = () => (
+  fetch('/api/room/')
+    .then(res => res.json())
+)
+
+const getQueriesFromServer = () => (
+  fetch('/api/query/')
+    .then(res => res.json())
+)
+
+const getReviewsFromServer = () => (
+  fetch('/api/review/')
+  .then(res => res.json())
+)
+
 
 class App extends React.Component {
   state = {
@@ -263,7 +288,22 @@ class App extends React.Component {
 
 componentDidMount = () => (
   getEmployeesFromServer().then(employees => {
-    console.log("from server: ", employees)
+    getPatientsFromServer().then(patients => {
+      getDemographicsFromServer().then(demographics => (
+        getRoomsFromServer().then(rooms => {
+          getQueriesFromServer().then(queries => {
+            getReviewsFromServer().then(reviews => {
+              console.log("Employees From Server", employees)
+              console.log("Patients From Server", patients)
+              console.log("Demographics From Server", demographics)
+              console.log("Rooms From Server", rooms)
+              console.log("Queries From Server", queries)
+              console.log("Reviews From Server", reviews)
+            })
+          })
+        })
+      ))
+    })
   })
 )
 
