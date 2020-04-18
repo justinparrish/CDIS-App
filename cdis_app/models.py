@@ -11,6 +11,11 @@ REVIEW_CHOICES = (
     ('Re-Review', 'Re-Review')
 )
 
+QUERY_STATUS_CHOICES = (
+    ('Open', 'Open'),
+    ('Closed', 'Closed')
+)
+
 # FINANCIAL_CLASS_CHOICES = (
 # ('Medicare', 'Medicare'),
 # ('Medicaid', 'Medicaid'),
@@ -97,19 +102,19 @@ class Query(models.Model):
     history_and_physical = models.CharField(max_length=1000)
     # Tx
     treatment = models.CharField(max_length=1000)
-    status= models.CharField(max_length=30)
+    status= models.CharField(max_length=30, choices=QUERY_STATUS_CHOICES)
     created_on= models.DateField(auto_now=False)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient+')
     
 class Review(models.Model):
-    ed = models.CharField(max_length=500)
-    vital_signs = models.CharField(max_length=500)
-    diagnostics = models.CharField(max_length=500)
-    medication_administration_record = models.CharField(max_length=500)
-    past_medical_history = models.CharField(max_length=500)
-    history_and_physical = models.CharField(max_length=500)
-    query_opportunities = models.CharField(max_length=500)
-    labs = models.CharField(max_length=500)
+    ed = models.CharField(max_length=1000)
+    vital_signs = models.CharField(max_length=1000)
+    diagnostics = models.CharField(max_length=1000)
+    medication_administration_record = models.CharField(max_length=1000)
+    past_medical_history = models.CharField(max_length=1000)
+    history_and_physical = models.CharField(max_length=1000)
+    query_opportunities = models.CharField(max_length=1000)
+    labs = models.CharField(max_length=1000)
     type = models.CharField(max_length=50, choices=REVIEW_CHOICES)
     created_on= models.DateField(auto_now=False)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient+')
