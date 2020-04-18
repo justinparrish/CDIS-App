@@ -31,7 +31,7 @@ class QuerySerializer(serializers.ModelSerializer):
         fields = [
                     'id', 'doctor_name', 'doctor_question', 
                     'clinical_indicators', 'history_and_physical', 
-                    'treatment', 'status', 'created_on' 'patient'
+                    'treatment', 'status', 'created_on', 'patient'
                  ]
         
 class ReviewSerializer(serializers.ModelSerializer):
