@@ -4,7 +4,12 @@ import { Button, Card, Image, CardDescription } from 'semantic-ui-react'
 const card = (query) => (
     <Card>
         <Card.Content>
-            <Card.Header>Query</Card.Header>
+            <Card.Header>
+                <em style={{ marginRight: '10px' }}>Query</em>
+                |
+                <em style={{ marginLeft: '10px' }}>{query.created_on}</em>
+            </Card.Header>
+            <Card.Meta>Status: {query.status}</Card.Meta>
             <Card.Description>
                 <ul style={{ listStyleType: 'none' }}>
                     <li>Doctor Name: {query.doctor_name}</li>

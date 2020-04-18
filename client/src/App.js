@@ -373,6 +373,7 @@ componentDidMount = () => (
       vital_signs: info.vital_signs,
       diagnostics: info.diagnostics,
       medication_administration_record: info.medication_administration_record,
+      past_medical_history: info.past_medical_history,
       history_and_physical: info.history_and_physical,
       query_opportunities: info.query_opportunities,
       labs: info.labs,
