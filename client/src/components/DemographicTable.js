@@ -3,12 +3,12 @@ import { Menu, Segment, Table } from 'semantic-ui-react'
 
 const tableRow = (patient) => (
     <Table.Row>
-        <Table.Cell>{patient.medicalRecNum}</Table.Cell>
-        <Table.Cell>{patient.admitDate}</Table.Cell>
-        <Table.Cell>{patient.financialClass}</Table.Cell>
-        <Table.Cell>{patient.demographic.patientName}</Table.Cell>
+        <Table.Cell>{patient.medical_rec_number}</Table.Cell>
+        <Table.Cell>{patient.admit_date}</Table.Cell>
+        <Table.Cell>{patient.financial_class}</Table.Cell>
+        <Table.Cell>{patient.demographic.patient_name}</Table.Cell>
         <Table.Cell>{patient.demographic.age}</Table.Cell>
-        <Table.Cell>{patient.demographic.dob}</Table.Cell>
+        <Table.Cell>{patient.demographic.date_of_birth}</Table.Cell>
         <Table.Cell>{patient.status}</Table.Cell>
         <Table.Cell selectable><a href='#'>Select</a></Table.Cell>
     </Table.Row>

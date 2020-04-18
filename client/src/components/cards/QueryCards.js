@@ -7,10 +7,10 @@ const card = (query) => (
             <Card.Header>Query</Card.Header>
             <Card.Description>
                 <ul style={{ listStyleType: 'none' }}>
-                    <li>Doctor Name: {query.doctorName}</li>
-                    <li>Doctor Question: {query.doctorQuestion}</li>
-                    <li>Clinical Indicators: {query.clinicalIndicators}</li>
-                    <li>H&P: {query.historyAndPhysical}</li>
+                    <li>Doctor Name: {query.doctor_name}</li>
+                    <li>Doctor Question: {query.doctor_question}</li>
+                    <li>Clinical Indicators: {query.clinical_indicators}</li>
+                    <li>H&P: {query.history_and_physical}</li>
                     <li>Tx: {query.treatment}</li>
                 </ul>
             </Card.Description>

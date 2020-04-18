@@ -7,12 +7,12 @@ const card = (review) => (
             <Card.Header>{review.type}</Card.Header>
             <Card.Description>
                 <ul style={{listStyleType: 'none'}}>
-                    <li>Ep: {review.ep}</li>
-                    <li>VS: {review.vitalSigns}</li>
-                    <li>Diagnostic: {review.diagnostic}</li>
-                    <li>Mar: {review.mar}</li>
-                    <li>H&P: {review.historyAndPhysical}</li>
-                    <li>Query Opportunites: {review.queryOpp}</li>
+                    <li>Ed: {review.ed}</li>
+                    <li>VS: {review.vital_signs}</li>
+                    <li>Diagnostic: {review.diagnostics}</li>
+                    <li>Mar: {review.medication_administration_record}</li>
+                    <li>H&P: {review.history_and_physical}</li>
+                    <li>Query Opportunites: {review.query_opportunities}</li>
                     <li>Labs: {review.labs}</li>
                 </ul>
             </Card.Description>
