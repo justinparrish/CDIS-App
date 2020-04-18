@@ -97,10 +97,12 @@ class Query(models.Model):
     history_and_physical = models.CharField(max_length=1000)
     # Tx
     treatment = models.CharField(max_length=1000)
+    status= models.CharField(max_length=30)
+    created_on= models.DateField(auto_now=False)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient+')
     
 class Review(models.Model):
-    ep = models.CharField(max_length=500)
+    ed = models.CharField(max_length=500)
     vital_signs = models.CharField(max_length=500)
     diagnostics = models.CharField(max_length=500)
     medication_administration_record = models.CharField(max_length=500)
@@ -109,4 +111,5 @@ class Review(models.Model):
     query_opportunities = models.CharField(max_length=500)
     labs = models.CharField(max_length=500)
     type = models.CharField(max_length=50, choices=REVIEW_CHOICES)
+    created_on= models.DateField(auto_now=False)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient+')

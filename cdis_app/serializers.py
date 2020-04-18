@@ -31,14 +31,14 @@ class QuerySerializer(serializers.ModelSerializer):
         fields = [
                     'id', 'doctor_name', 'doctor_question', 
                     'clinical_indicators', 'history_and_physical', 
-                    'treatment', 'patient'
+                    'treatment', 'status', 'created_on' 'patient'
                  ]
         
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = [
-                    'id', 'ep', 'vital_signs', 'diagnostics',
+                    'id', 'ed', 'vital_signs', 'diagnostics',
                     'medication_administration_record', 'past_medical_history', 'history_and_physical', 
-                    'query_opportunities', 'labs', 'type', 'patient'
+                    'query_opportunities', 'labs', 'type', 'created_on', 'patient'
                 ]
