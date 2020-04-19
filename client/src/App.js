@@ -278,6 +278,26 @@ const getReviewsFromServer = () => (
   .then(res => res.json())
 )
 
+const reducePatientsToEmployee = (employees, patients) => {
+  employees.reduce((obj, employee) => {
+    employee.patients = patients.filter(patient => patient.employee === employee.id)
+    obj[employee.id] = employee
+    console.log(obj)
+    return obj
+  }, {})
+}
+
+const reduceDemographicToPatient = (patients, demographics) => {
+  console.log("demographic", demographics)
+  patients.reduce((obj, patient) => {
+    patient.demographic = demographics.filter(demographic => demographic.patient === patient.id)
+    obj[patient.id] = patient
+    console.log(obj)
+    return obj
+  }, {})
+}
+
+
 
 class App extends React.Component {
   state = {
@@ -287,25 +307,12 @@ class App extends React.Component {
   }
 
 componentDidMount = () => (
-  getEmployeesFromServer().then(employees => {
-    getPatientsFromServer().then(patients => {
-      getDemographicsFromServer().then(demographics => (
-        getRoomsFromServer().then(rooms => {
-          getQueriesFromServer().then(queries => {
-            getReviewsFromServer().then(reviews => {
-              console.log("Employees From Server", employees)
-              console.log("Patients From Server", patients)
-              console.log("Demographics From Server", demographics)
-              console.log("Rooms From Server", rooms)
-              console.log("Queries From Server", queries)
-              console.log("Reviews From Server", reviews)
-            })
-          })
-        })
-      ))
-    })
-  })
-)
+  getEmployeesFromServer().then(employees =>
+    getPatientsFromServer().then(patients => 
+      getDemographicsFromServer().then(demographics =>
+        getRoomsFromServer().then(rooms => 
+      reducePatientsToEmployee(employees, patients, reduceDemographicToPatient(patients,demographics))))
+)))
 
   getAllEmployees = () => (
     Object.values(this.state.employees)
