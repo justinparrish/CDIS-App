@@ -178,7 +178,7 @@ const docs =
             query_opportunities: "query opportunities 1",
             labs: "lab results 1",
             type: "Review",
-            created_on:'2020-19-02'
+            created_on: '2020-19-02'
           }
         ]
       },
@@ -275,7 +275,7 @@ const getQueriesFromServer = () => (
 
 const getReviewsFromServer = () => (
   fetch('/api/review/')
-  .then(res => res.json())
+    .then(res => res.json())
 )
 
 const appendPatientsToEmployee = (employees, patients) => {
@@ -298,7 +298,7 @@ const appendDemographicToPatient = (patients, demographics) => {
 }
 
 const appendRoomToPatient = (patients, rooms) => {
-  console.log("rooms",rooms)
+  console.log("rooms", rooms)
   patients.reduce((obj, patient) => {
     patient.room = rooms.filter(room => room.patient === patient.id)
     obj[patient.id] = patient
@@ -308,7 +308,7 @@ const appendRoomToPatient = (patients, rooms) => {
 }
 
 const appendQueriesToPatient = (patients, queries) => {
-  console.log("queries",queries)
+  console.log("queries", queries)
   patients.reduce((obj, patient) => {
     patient.query = queries.filter(query => query.patient === patient.id)
     obj[patient.id] = patient
@@ -317,7 +317,7 @@ const appendQueriesToPatient = (patients, queries) => {
   }, {})
 }
 const appendReviewsToPatient = (patients, reviews) => {
-  console.log("reviews",reviews)
+  console.log("reviews", reviews)
   patients.reduce((obj, patient) => {
     patient.review = reviews.filter(review => review.patient === patient.id)
     obj[patient.id] = patient
@@ -334,19 +334,19 @@ class App extends React.Component {
     currentPatient: 0
   }
 
-componentDidMount = () => (
-  getEmployeesFromServer().then(employees =>
-    getPatientsFromServer().then(patients => 
-      getDemographicsFromServer().then(demographics =>
-        getRoomsFromServer().then(rooms => 
-          getQueriesFromServer().then(queries =>
-            getReviewsFromServer().then(reviews =>
-      appendPatientsToEmployee(employees, patients, 
-        appendDemographicToPatient(patients,demographics), 
-        appendRoomToPatient(patients, rooms),
-        appendQueriesToPatient(patients, queries),
-        appendReviewsToPatient(patients, reviews)
-        ))))))))
+  componentDidMount = () => (
+    getEmployeesFromServer().then(employees =>
+      getPatientsFromServer().then(patients =>
+        getDemographicsFromServer().then(demographics =>
+          getRoomsFromServer().then(rooms =>
+            getQueriesFromServer().then(queries =>
+              getReviewsFromServer().then(reviews =>
+                appendPatientsToEmployee(employees, patients,
+                  appendDemographicToPatient(patients, demographics),
+                  appendRoomToPatient(patients, rooms),
+                  appendQueriesToPatient(patients, queries),
+                  appendReviewsToPatient(patients, reviews)
+                ))))))))
 
   getAllEmployees = () => (
     Object.values(this.state.employees)
