@@ -278,7 +278,7 @@ const getReviewsFromServer = () => (
   .then(res => res.json())
 )
 
-const reducePatientsToEmployee = (employees, patients) => {
+const appendPatientsToEmployee = (employees, patients) => {
   employees.reduce((obj, employee) => {
     employee.patients = patients.filter(patient => patient.employee === employee.id)
     obj[employee.id] = employee
@@ -287,7 +287,7 @@ const reducePatientsToEmployee = (employees, patients) => {
   }, {})
 }
 
-const reduceDemographicToPatient = (patients, demographics) => {
+const appendDemographicToPatient = (patients, demographics) => {
   console.log("demographic", demographics)
   patients.reduce((obj, patient) => {
     patient.demographic = demographics.filter(demographic => demographic.patient === patient.id)
@@ -297,6 +297,34 @@ const reduceDemographicToPatient = (patients, demographics) => {
   }, {})
 }
 
+const appendRoomToPatient = (patients, rooms) => {
+  console.log("rooms",rooms)
+  patients.reduce((obj, patient) => {
+    patient.room = rooms.filter(room => room.patient === patient.id)
+    obj[patient.id] = patient
+    console.log(obj)
+    return obj
+  }, {})
+}
+
+const appendQueriesToPatient = (patients, queries) => {
+  console.log("queries",queries)
+  patients.reduce((obj, patient) => {
+    patient.query = queries.filter(query => query.patient === patient.id)
+    obj[patient.id] = patient
+    console.log(obj)
+    return obj
+  }, {})
+}
+const appendReviewsToPatient = (patients, reviews) => {
+  console.log("reviews",reviews)
+  patients.reduce((obj, patient) => {
+    patient.review = reviews.filter(review => review.patient === patient.id)
+    obj[patient.id] = patient
+    console.log(obj)
+    return obj
+  }, {})
+}
 
 
 class App extends React.Component {
@@ -311,8 +339,14 @@ componentDidMount = () => (
     getPatientsFromServer().then(patients => 
       getDemographicsFromServer().then(demographics =>
         getRoomsFromServer().then(rooms => 
-      reducePatientsToEmployee(employees, patients, reduceDemographicToPatient(patients,demographics))))
-)))
+          getQueriesFromServer().then(queries =>
+            getReviewsFromServer().then(reviews =>
+      appendPatientsToEmployee(employees, patients, 
+        appendDemographicToPatient(patients,demographics), 
+        appendRoomToPatient(patients, rooms),
+        appendQueriesToPatient(patients, queries),
+        appendReviewsToPatient(patients, reviews)
+        ))))))))
 
   getAllEmployees = () => (
     Object.values(this.state.employees)
