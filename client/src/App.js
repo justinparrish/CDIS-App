@@ -279,53 +279,60 @@ const getReviewsFromServer = () => (
 )
 
 const appendPatientsToEmployee = (employees, patients) => {
-  employees.reduce((obj, employee) => {
-    employee.patients = patients.filter(patient => patient.employee === employee.id)
-    obj[employee.id] = employee
-    console.log(obj)
+  employees.reduce((obj, employees) => {
+    employees.patients = patients.filter(patient => patient.employees === employees.id)
+    obj[employees.id] = employees
     return obj
   }, {})
 }
 
 const appendDemographicToPatient = (patients, demographics) => {
-  console.log("demographic", demographics)
-  patients.reduce((obj, patient) => {
+  console.log("demographic", demographics[0].patient)
+  patients.reduce((employee, patient) => {
     patient.demographic = demographics.filter(demographic => demographic.patient === patient.id)
-    obj[patient.id] = patient
-    console.log(obj)
-    return obj
+    employee[patient.id] = patient
+    return employee
   }, {})
 }
 
 const appendRoomToPatient = (patients, rooms) => {
-  console.log("rooms", rooms)
-  patients.reduce((obj, patient) => {
+  patients.reduce((employee, patient) => {
     patient.room = rooms.filter(room => room.patient === patient.id)
-    obj[patient.id] = patient
-    console.log(obj)
-    return obj
+    employee[patient.id] = patient
+    return employee
   }, {})
 }
 
 const appendQueriesToPatient = (patients, queries) => {
-  console.log("queries", queries)
-  patients.reduce((obj, patient) => {
+  patients.reduce((employee, patient) => {
     patient.query = queries.filter(query => query.patient === patient.id)
-    obj[patient.id] = patient
-    console.log(obj)
-    return obj
+    employee[patient.id] = patient
+    return employee
   }, {})
 }
 const appendReviewsToPatient = (patients, reviews) => {
-  console.log("reviews", reviews)
-  patients.reduce((obj, patient) => {
+  patients.reduce((employee, patient) => {
     patient.review = reviews.filter(review => review.patient === patient.id)
-    obj[patient.id] = patient
-    console.log(obj)
-    return obj
+    employee[patient.id] = patient
+    console.log("appendReviewsToPatient",employee)
+    return employee
   }, {})
 }
 
+const getAllFromServer = () => (
+  getEmployeesFromServer().then(employees =>
+    getPatientsFromServer().then(patients =>
+      getDemographicsFromServer().then(demographics =>
+        getRoomsFromServer().then(rooms =>
+          getQueriesFromServer().then(queries =>
+            getReviewsFromServer().then(reviews =>
+              appendPatientsToEmployee(employees, patients,
+                appendDemographicToPatient(patients, demographics),
+                appendRoomToPatient(patients, rooms),
+                appendQueriesToPatient(patients, queries),
+                appendReviewsToPatient(patients, reviews)
+              )))))))
+)
 
 class App extends React.Component {
   state = {
@@ -334,19 +341,17 @@ class App extends React.Component {
     currentPatient: 0
   }
 
-  componentDidMount = () => (
-    getEmployeesFromServer().then(employees =>
-      getPatientsFromServer().then(patients =>
-        getDemographicsFromServer().then(demographics =>
-          getRoomsFromServer().then(rooms =>
-            getQueriesFromServer().then(queries =>
-              getReviewsFromServer().then(reviews =>
-                appendPatientsToEmployee(employees, patients,
-                  appendDemographicToPatient(patients, demographics),
-                  appendRoomToPatient(patients, rooms),
-                  appendQueriesToPatient(patients, queries),
-                  appendReviewsToPatient(patients, reviews)
-                ))))))))
+  componentDidMount = () => {
+    getEmployeesFromServer().then(employees => (
+      getPatientsFromServer().then(patients => (
+        this.setState({em : employees.reduce((obj, employee) => {
+          employee.patients = patients.filter(patient => patient.employee === employee.id)
+          obj[employee.id] = employee
+          return obj
+        }, {})})
+      )))
+    )
+  }
 
   getAllEmployees = () => (
     Object.values(this.state.employees)
@@ -476,11 +481,16 @@ class App extends React.Component {
     let password = credentials.password
   }
 
+  getState = () => (
+    console.log("click for state", this.state)
+  )
+
   render() {
     console.log(this.state)
     return (
       <div className="container">
         <h1>CDIS App</h1>
+        <button onClick={this.getState}>Get State</button>
         {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
         {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatientIndex)}
