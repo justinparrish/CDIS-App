@@ -278,62 +278,6 @@ const getReviewsFromServer = () => (
     .then(res => res.json())
 )
 
-const appendPatientsToEmployee = (employees, patients) => {
-  employees.reduce((obj, employees) => {
-    employees.patients = patients.filter(patient => patient.employees === employees.id)
-    obj[employees.id] = employees
-    return obj
-  }, {})
-}
-
-const appendDemographicToPatient = (patients, demographics) => {
-  console.log("demographic", demographics[0].patient)
-  patients.reduce((employee, patient) => {
-    patient.demographic = demographics.filter(demographic => demographic.patient === patient.id)
-    employee[patient.id] = patient
-    return employee
-  }, {})
-}
-
-const appendRoomToPatient = (patients, rooms) => {
-  patients.reduce((employee, patient) => {
-    patient.room = rooms.filter(room => room.patient === patient.id)
-    employee[patient.id] = patient
-    return employee
-  }, {})
-}
-
-const appendQueriesToPatient = (patients, queries) => {
-  patients.reduce((employee, patient) => {
-    patient.query = queries.filter(query => query.patient === patient.id)
-    employee[patient.id] = patient
-    return employee
-  }, {})
-}
-const appendReviewsToPatient = (patients, reviews) => {
-  patients.reduce((employee, patient) => {
-    patient.review = reviews.filter(review => review.patient === patient.id)
-    employee[patient.id] = patient
-    console.log("appendReviewsToPatient",employee)
-    return employee
-  }, {})
-}
-
-const getAllFromServer = () => (
-  getEmployeesFromServer().then(employees =>
-    getPatientsFromServer().then(patients =>
-      getDemographicsFromServer().then(demographics =>
-        getRoomsFromServer().then(rooms =>
-          getQueriesFromServer().then(queries =>
-            getReviewsFromServer().then(reviews =>
-              appendPatientsToEmployee(employees, patients,
-                appendDemographicToPatient(patients, demographics),
-                appendRoomToPatient(patients, rooms),
-                appendQueriesToPatient(patients, queries),
-                appendReviewsToPatient(patients, reviews)
-              )))))))
-)
-
 class App extends React.Component {
   state = {
     employees: docs,
@@ -344,13 +288,42 @@ class App extends React.Component {
   componentDidMount = () => {
     getEmployeesFromServer().then(employees => (
       getPatientsFromServer().then(patients => (
-        this.setState({em : employees.reduce((obj, employee) => {
-          employee.patients = patients.filter(patient => patient.employee === employee.id)
-          obj[employee.id] = employee
-          return obj
-        }, {})})
-      )))
-    )
+        this.setState({
+          em: employees.reduce((obj, employee) => {
+            employee.patients = patients.filter(patient => patient.employee === employee.id)
+            obj[employee.id] = employee
+            return obj
+          }, {})
+        }),
+        getDemographicsFromServer().then(demographics => (
+          getRoomsFromServer().then(rooms => (
+            getQueriesFromServer().then(queries => (
+              getReviewsFromServer().then(reviews => (
+                this.setState({
+                  em: patients.reduce((employee, patient) => {
+                    patient.query = queries.filter(query => query.patient === patient.id)
+                    patient.review = reviews.filter(review => review.patient === patient.id)
+                    for (let i = 0; i < demographics.length; i++) {
+                      if (demographics[i].patient === patient.id) {
+                        patient.demographic = demographics[i]
+                      }
+                    }
+                    for (let j = 0; j < rooms.length; j++) {
+                      if (rooms[j].patient === patient.id) {
+                        patient.room = rooms[j]
+                      }
+                    }
+                    employee[patient.id] = patient
+                    return employee
+                  }, {})
+                })
+              ))
+            ))
+          ))
+        ))
+      ))
+    ))
+
   }
 
   getAllEmployees = () => (
