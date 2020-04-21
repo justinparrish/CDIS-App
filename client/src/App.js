@@ -4,6 +4,10 @@ import PatientForm from './components/forms/PatientForm'
 import QueryForm from './components/forms/QueryForm';
 import ReviewForm from './components/forms/ReviewForm'
 import Tabs from './components/Tabs'
+import FadeIn from "react-fade-in";
+import Lottie from "react-lottie";
+import ReactLoading from "react-loading";
+import "bootstrap/dist/css/bootstrap.css";
 
 
 
@@ -278,51 +282,64 @@ const getReviewsFromServer = () => (
     .then(res => res.json())
 )
 
-class App extends React.Component {
-  state = {
-    employees: docs,
-    currentEmployee: 1,
-    currentPatient: 0
-  }
+const getAllFromServer = () => (
+  getEmployeesFromServer().then(employees => (
+    getPatientsFromServer().then(patients => (
 
-  componentDidMount = () => {
-    getEmployeesFromServer().then(employees => (
-      getPatientsFromServer().then(patients => (
-        this.setState({
-          em: employees.reduce((obj, employee) => {
-            employee.patients = patients.filter(patient => patient.employee === employee.id)
-            obj[employee.id] = employee
-            return obj
-          }, {})
-        }),
-        getDemographicsFromServer().then(demographics => (
-          getRoomsFromServer().then(rooms => (
-            getQueriesFromServer().then(queries => (
-              getReviewsFromServer().then(reviews => (
-                this.setState({
-                  em: patients.reduce((employee, patient) => {
-                    patient.query = queries.filter(query => query.patient === patient.id)
-                    patient.review = reviews.filter(review => review.patient === patient.id)
-                    for (let i = 0; i < demographics.length; i++) {
-                      if (demographics[i].patient === patient.id) {
-                        patient.demographic = demographics[i]
-                      }
+      
+      getDemographicsFromServer().then(demographics => (
+        getRoomsFromServer().then(rooms => (
+          getQueriesFromServer().then(queries => (
+            getReviewsFromServer().then(reviews => (
+                patients.reduce((employee, patient) => {
+                  for (let i = 0; i < demographics.length; i++) {
+                    if (demographics[i].patient === patient.id) {
+                      patient.demographic = demographics[i]
                     }
-                    for (let j = 0; j < rooms.length; j++) {
-                      if (rooms[j].patient === patient.id) {
-                        patient.room = rooms[j]
-                      }
+                  }
+                  for (let j = 0; j < rooms.length; j++) {
+                    if (rooms[j].patient === patient.id) {
+                      patient.room = rooms[j]
                     }
-                    employee[patient.id] = patient
-                    return employee
-                  }, {})
-                })
-              ))
+                  }
+                  patient.query = queries.filter(query => query.patient === patient.id)
+                  patient.review = reviews.filter(review => review.patient === patient.id)
+                  employee[patient.id] = patient
+                  return employee
+                }, {}),
+                employees.reduce((obj, employee) => {
+                  employee.patients = patients.filter(patient => patient.employee === employee.id)
+                  obj[employee.id] = employee
+                  return obj
+                }, {})
+              
             ))
           ))
         ))
       ))
     ))
+  ))
+)
+
+class App extends React.Component {
+  state = {
+    employees: docs,
+    currentEmployee: 1,
+    currentPatient: 0,
+    done: undefined
+  }
+
+  componentDidMount = () => {
+    getAllFromServer()
+      .then(employees => {
+        console.log("object", employees)
+        this.setState({ employees})
+      }).then(
+          setTimeout(() => {
+            this.setState({done : true})
+          }, 7000)
+
+      )
 
   }
 
@@ -464,7 +481,26 @@ class App extends React.Component {
       <div className="container">
         <h1>CDIS App</h1>
         <button onClick={this.getState}>Get State</button>
-        {getEmployeeName(this.getCurrentEmployee())} <br />
+        {!this.state.done ? (<ReactLoading type={"bars"} color={"black"} /> ):
+        <Tabs
+          employeename={getEmployeeName(this.getCurrentEmployee())}
+          currentEmployee={this.getCurrentEmployee()}
+          pform={<PatientForm addNewPatient={this.addNewPatient} />}
+          rform={<ReviewForm addNewReview={this.addNewReview} />}
+          qform={<QueryForm addNewQuery={this.addNewQuery} />}
+          patientInfo={getPatientInfo(this.getCurrentPatient())}
+          demographic={getPatientDemographics(this.getCurrentPatient())}
+          roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
+          reviews={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review}
+          queries={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query}
+          info={getPatientInfo(this.getCurrentPatient())}
+          roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
+          demographics={getPatientDemographics(this.getCurrentPatient())}
+          patientname={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patient_name}
+
+        /> 
+    }
+        {/* {getEmployeeName(this.getCurrentEmployee())} <br />
         {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
         {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatientIndex)}
         <Tabs
@@ -483,7 +519,7 @@ class App extends React.Component {
           demographics={getPatientDemographics(this.getCurrentPatient())}
           patientname={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patient_name}
 
-        />
+        /> */}
 
         {/* <LoginForm authenicate={this.authenicate}/> */}
       </div>
