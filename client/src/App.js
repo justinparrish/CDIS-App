@@ -332,6 +332,11 @@ const getAllFromServer = () => (
   ))
 )
 
+// --------- Sending Data to Database with Fetch POST Method ----------
+const sendPatientToDb = (patientData) => (
+  
+)
+
 class App extends React.Component {
   state = {
     employees: docs,
