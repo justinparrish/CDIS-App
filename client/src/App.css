@@ -14,3 +14,8 @@ body {
   height: 700px;
   overflow: scroll;
 }
+
+.add-patient-button {
+  float: right;
+  margin-bottom: 13px !important;
+}

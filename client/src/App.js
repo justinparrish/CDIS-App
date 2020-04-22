@@ -8,6 +8,8 @@ import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import ReactLoading from "react-loading";
 import "bootstrap/dist/css/bootstrap.css";
+import * as legoData from "./legoloading.json"
+
 
 
 
@@ -126,6 +128,15 @@ const patientList = (patients, currentPatient, onChange) => (
   </select>
 )
 
+// Loading Screen Options
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: legoData.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice"
+  }
+}
 
 // ----------- Test Data Structure --------------
 const docs =
@@ -326,7 +337,7 @@ class App extends React.Component {
     employees: docs,
     currentEmployee: 1,
     currentPatient: 0,
-    done: undefined
+    done: undefined,
   }
 
   componentDidMount = () => {
@@ -479,13 +490,17 @@ class App extends React.Component {
     console.log(this.state)
     return (
       <div className="container">
-        <h1>CDIS App</h1>
-        <button onClick={this.getState}>Get State</button>
         {!this.state.done ?
           <div className="loading-screen">
-            <ReactLoading type={"bars"} color={"black"} /> :
-        </div>
+            <FadeIn>
+              <div class="d-flex justify-content-center align-items-center">
+                <Lottie options={defaultOptions} height={600} width={900} />
+              </div>
+            </FadeIn>
+          </div>
+          :
           <div className="content">
+            <h1>Documentation Helper</h1>
             {getEmployeeName(this.getCurrentEmployee())} <br />
             {employeeList(this.getAllEmployees(), this.state.currentEmployee, this.setCurrentEmployee)}
             {patientList(this.getAllEmployeePatients(), this.state.currentPatient, this.setCurrentPatientIndex)}
@@ -506,7 +521,7 @@ class App extends React.Component {
               patientname={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patient_name}
             />
           </div>
-      }
+        }
 
         {/* <LoginForm authenicate={this.authenicate}/> */}
       </div>
