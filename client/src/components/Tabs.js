@@ -10,7 +10,14 @@ const panes = [
         menuItem: { key: 'patients', icon: 'users', content: 'Patients' },
         render: (props) => (
             <Tab.Pane>
-                {props.employeename}
+                <Modal trigger={<Button className="add-patient-button">Add New Patient</Button>} size='large' style={{position: 'relative'}}>
+                    <Modal.Header>Enter New Patient Info</Modal.Header>
+                <Modal.Content>
+                <Modal.Description>
+                {props.pform}
+                </Modal.Description>
+                </Modal.Content>
+                </Modal>
                 {props.chart}
             </Tab.Pane>
         )
@@ -19,14 +26,6 @@ const panes = [
         menuItem: { key: 'patient', icon: 'address card', content: 'Patient' },
         render: (props) => (
             <Tab.Pane>
-                <Modal trigger={<Button>Add New Patient</Button>} size='fullscreen'>
-                    <Modal.Header>Enter New Patient Info</Modal.Header>
-                <Modal.Content>
-                <Modal.Description>
-                {props.pform}
-                </Modal.Description>
-                </Modal.Content>
-                </Modal>
                 <h1>Patient's Info</h1>
                 {props.patientaccordion}
             </Tab.Pane>
