@@ -6,7 +6,6 @@ import ReviewForm from './components/forms/ReviewForm'
 import Tabs from './components/Tabs'
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
-import ReactLoading from "react-loading";
 import "bootstrap/dist/css/bootstrap.css";
 import * as legoData from "./legoloading.json"
 
@@ -296,8 +295,6 @@ const getReviewsFromServer = () => (
 const getAllFromServer = () => (
   getEmployeesFromServer().then(employees => (
     getPatientsFromServer().then(patients => (
-
-
       getDemographicsFromServer().then(demographics => (
         getRoomsFromServer().then(rooms => (
           getQueriesFromServer().then(queries => (
@@ -331,11 +328,18 @@ const getAllFromServer = () => (
     ))
   ))
 )
-
+let patientUrl = fetch('/api/patient/')
+let demographicUrl = fetch('/api/demographic')
 // --------- Sending Data to Database with Fetch POST Method ----------
-const sendPatientToDb = (patientData) => (
-  
+const sendPatientReviewToDb = (reviewData) => (
+  fetch('/api/review/',
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(reviewData)
+  }).then(res => res.json())
 )
+
 
 class App extends React.Component {
   state = {
@@ -354,9 +358,7 @@ class App extends React.Component {
         setTimeout(() => {
           this.setState({ done: true })
         }, 7000)
-
       )
-
   }
 
   getAllEmployees = () => (
@@ -455,30 +457,32 @@ class App extends React.Component {
     this.setState({ employees })
   }
   addNewReview = (info) => {
-    let employees = this.state.employees
+    sendPatientReviewToDb({...info, patient: this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].id}).then(info => {
 
-    let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].review.length + 1
-
-    let newReview = {
-      id: nextQueryId,
-      ed: info.ed,
-      vital_signs: info.vital_signs,
-      diagnostics: info.diagnostics,
-      medication_administration_record: info.medication_administration_record,
-      past_medical_history: info.past_medical_history,
-      history_and_physical: info.history_and_physical,
-      query_opportunities: info.query_opportunities,
-      labs: info.labs,
-      type: info.type,
-      created_on: info.created_on
-    }
-
-    employees[this.state.currentEmployee].patients[this.state.currentPatient].review.push(newReview)
-
-    console.log("New Review", newReview)
-    console.log(nextQueryId)
-
-    this.setState({ employees })
+      let employees = this.state.employees
+  
+      let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].review.length + 1
+  
+      let newReview = {
+        // id: nextQueryId,
+        ed: info.ed,
+        vital_signs: info.vital_signs,
+        diagnostics: info.diagnostics,
+        medication_administration_record: info.medication_administration_record,
+        past_medical_history: info.past_medical_history,
+        history_and_physical: info.history_and_physical,
+        query_opportunities: info.query_opportunities,
+        labs: info.labs,
+        type: info.type,
+        created_on: info.created_on
+      }
+  
+      employees[this.state.currentEmployee].patients[this.state.currentPatient].review.push(newReview)
+  
+      console.log("New Review", newReview)
+      console.log("next id",nextQueryId)
+      this.setState({ employees })
+    })
   }
 
   authenicate = (credentials) => {
