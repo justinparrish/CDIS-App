@@ -340,6 +340,14 @@ const sendPatientReviewToDb = (reviewData) => (
   }).then(res => res.json())
 )
 
+const sendPatientQueryToDb = (queryData) => (
+  fetch('/api/query/',
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(queryData)
+  }).then(res => res.json())
+)
 
 class App extends React.Component {
   state = {
@@ -434,27 +442,29 @@ class App extends React.Component {
   }
   // ------------------------------------------
   addNewQuery = (info) => {
-    let employees = this.state.employees
-
-    let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].query.length + 1
-
-    let newQuery = {
-      id: nextQueryId,
-      doctor_name: info.doctor_name,
-      doctor_question: info.doctor_question,
-      clinical_indicators: info.clinical_indicators,
-      history_and_physical: info.history_and_physical,
-      treatment: info.treatment,
-      status: info.status,
-      created_on: info.created_on
-    }
-
-    employees[this.state.currentEmployee].patients[this.state.currentPatient].query.push(newQuery)
-
-    console.log("New Query", newQuery)
-    console.log(nextQueryId)
-
-    this.setState({ employees })
+    sendPatientQueryToDb({...info, patient: this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].id}).then(info => {
+      let employees = this.state.employees
+  
+      let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].query.length + 1
+  
+      let newQuery = {
+        // id: nextQueryId,
+        doctor_name: info.doctor_name,
+        doctor_question: info.doctor_question,
+        clinical_indicators: info.clinical_indicators,
+        history_and_physical: info.history_and_physical,
+        treatment: info.treatment,
+        status: info.status,
+        created_on: info.created_on
+      }
+  
+      employees[this.state.currentEmployee].patients[this.state.currentPatient].query.push(newQuery)
+  
+      console.log("New Query", newQuery)
+      console.log(nextQueryId)
+  
+      this.setState({ employees })
+    })
   }
   addNewReview = (info) => {
     sendPatientReviewToDb({...info, patient: this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].id}).then(info => {
