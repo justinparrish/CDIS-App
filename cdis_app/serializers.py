@@ -11,7 +11,7 @@ class PatientSerializer(serializers.ModelSerializer):
         model = Patient
         fields = [
                   'id', 'account_number', 'medical_rec_number', 
-                  'admit_date', 'discharge_date', 'length_of_stay',
+                  'admit_date', 'length_of_stay',
                   'financial_class', 'status', 'employee'
                   ]
         

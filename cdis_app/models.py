@@ -75,8 +75,6 @@ class Patient(models.Model):
     account_number = models.CharField(max_length=13)
     medical_rec_number = models.CharField(max_length=9)
     admit_date = models.DateField(auto_now=False)
-    # remove vvvv
-    discharge_date = models.DateField(auto_now=False) 
     length_of_stay = models.IntegerField(default=1)
     financial_class= models.CharField(max_length=60)
     status = models.CharField(max_length=30, choices=PATIENT_STATUS_CHOICES)
