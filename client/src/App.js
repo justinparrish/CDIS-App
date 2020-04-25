@@ -3,6 +3,8 @@ import './App.css';
 import PatientForm from './components/forms/PatientForm'
 import QueryForm from './components/forms/QueryForm';
 import ReviewForm from './components/forms/ReviewForm'
+import DemographicForm from './components/forms/DemographicForm'
+import RoomForm from './components/forms/RoomForm'
 import Tabs from './components/Tabs'
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
@@ -117,7 +119,7 @@ const employeeList = (employees, currentEmployee, onChange) => (
 
 //List of Cars
 const patientNameOption = (patient) => (
-  <option value={patient.account_number}>{patient.demographic.patient_name}</option>
+  <option value={patient.account_number || "Loading..."}>{patient.demographic.patient_name || "Loading..."}</option>
 )
 
 const patientList = (patients, currentPatient, onChange) => (
@@ -328,8 +330,6 @@ const getAllFromServer = () => (
     ))
   ))
 )
-let patientUrl = fetch('/api/patient/')
-let demographicUrl = fetch('/api/demographic')
 // --------- Sending Data to Database with Fetch POST Method ----------
 const sendPatientReviewToDb = (reviewData) => (
   fetch('/api/review/',
@@ -346,6 +346,31 @@ const sendPatientQueryToDb = (queryData) => (
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(queryData)
+  }).then(res => res.json())
+)
+
+const sendPatientInfoToDb = (patientData) => (
+  fetch('/api/patient/',
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify(patientData)
+  }).then(res => res.json())
+)
+
+const sendPatientDemographicToDb = (demographicData) => (
+  fetch('/api/demographic/', {
+    method: "POST",
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify(demographicData)
+  }).then(res => res.json())
+)
+
+const sendPatientRoomToDb = (roomData) => (
+  fetch('/api/room/', {
+    method: "POST",
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify(roomData)
   }).then(res => res.json())
 )
 
@@ -401,43 +426,60 @@ class App extends React.Component {
   )
   // ------------------------------------------
   addNewPatient = (info) => {
-    console.log("Patient From App Comp.", info)
-    let employees = this.state.employees
+    getPatientsFromServer().then(patients => {
+    sendPatientInfoToDb({...info, employee: this.state.employees[this.state.currentEmployee].id}).then(patientInfo => {
+      sendPatientDemographicToDb({...info, patient: patients[patients.length - 1].id + 1}).then(demographic => {
+        sendPatientRoomToDb({...info, patient: patients[patients.length - 1].id + 1}).then(room => {
+          
+          console.log("Patient From App Comp.", info)
+          
+          let employees = this.state.employees
+          
+          let nextPatientId = patients[patients.length - 1].id + 1
+          console.log("patient array length", nextPatientId)
 
-    let newPatientInfo = {
-      id: 2,
-      account_number: info.account_number,
-      medical_rec_number: info.medical_rec_number,
-      admit_date: info.admit_date,
-      length_of_stay: info.length_of_stay,
-      financial_class: info.financial_class,
-      status: info.status,
-    }
-    console.log("Patient Info part 1", newPatientInfo)
-    let newDemographic = {
-      id: 2,
-      patient_name: info.patient_name,
-      age: info.age,
-      date_of_birth: info.date_of_birth
-    }
-    let newRoom = {
-      id: 2,
-      nursing_unit: info.nursing_unit,
-      room: info.room,
-      date_in: info.date_in,
-      date_out: info.date_out
-    }
-    newPatientInfo.demographic = newDemographic
-    newPatientInfo.room = newRoom
-    newPatientInfo.query = []
-    newPatientInfo.review = []
-    console.log("Demographic", newDemographic)
-    console.log("Room Info", newRoom)
-    console.log("Patient Info part 2", newPatientInfo)
+          let newPatientInfo = {
+            id: nextPatientId,
+            account_number: patientInfo.account_number,
+            medical_rec_number: patientInfo.medical_rec_number,
+            admit_date: patientInfo.admit_date,
+            length_of_stay: patientInfo.length_of_stay,
+            financial_class: patientInfo.financial_class,
+            status: patientInfo.status,
+          }
+          console.log("Patient Info part 1", newPatientInfo)
+          let newDemographic = {
+            // id: 2,
+            patient_name: demographic.patient_name,
+            age: demographic.age,
+            date_of_birth: demographic.date_of_birth,
+            // patient: nextPatientId
+          }
+          let newRoom = {
+            // id: ,
+            nursing_unit: room.nursing_unit,
+            room: room.room,
+            date_in: room.date_in,
+            date_out: room.date_out,
+            // patient: nextPatientId
+          }
+          newPatientInfo.demographic = newDemographic
+          newPatientInfo.room = newRoom
+          newPatientInfo.query = []
+          newPatientInfo.review = []
+          console.log("Demographic", newDemographic)
+          console.log("Room Info", newRoom)
+          // console.log("Patient Info id", newPatientInfo.id)
 
-    employees[this.state.currentEmployee].patients.push(newPatientInfo)
+      
+          employees[this.state.currentEmployee].patients.push(newPatientInfo)
+      
+          this.setState({ employees })
 
-    this.setState({ employees })
+        })
+      })
+    })
+  })
 
   }
   // ------------------------------------------
@@ -529,6 +571,8 @@ class App extends React.Component {
               pform={<PatientForm addNewPatient={this.addNewPatient} />}
               rform={<ReviewForm addNewReview={this.addNewReview} />}
               qform={<QueryForm addNewQuery={this.addNewQuery} />}
+              // dform={<DemographicForm addNewPatient={this.addNewPatient} />}
+              // roomform={<RoomForm addNewPatient={this.addNewPatient} />}
               patientInfo={getPatientInfo(this.getCurrentPatient())}
               demographic={getPatientDemographics(this.getCurrentPatient())}
               roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
@@ -537,7 +581,7 @@ class App extends React.Component {
               info={getPatientInfo(this.getCurrentPatient())}
               roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
               demographics={getPatientDemographics(this.getCurrentPatient())}
-              patientname={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patient_name}
+              patientname={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patient_name || "Loading..."}
             />
           </div>
         }

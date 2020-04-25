@@ -10,11 +10,16 @@ const panes = [
         menuItem: { key: 'patients', icon: 'users', content: 'Patients' },
         render: (props) => (
             <Tab.Pane>
-                <Modal trigger={<Button className="add-patient-button">Add New Patient</Button>} size='large' style={{position: 'relative'}}>
+                <Modal trigger={<Button className="add-patient-button">Add New Patient</Button>} size='large' style={{position: 'relative', overflow: 'scroll'}}>
                     <Modal.Header>Enter New Patient Info</Modal.Header>
                 <Modal.Content>
                 <Modal.Description>
+                <h2>Patient Info</h2>
                 {props.pform}
+                {/* <h2>Demographic Info</h2>
+                {props.dform}
+                <h2>Room Info</h2>
+                {props.roomform} */}
                 </Modal.Description>
                 </Modal.Content>
                 </Modal>
@@ -65,6 +70,8 @@ export default class Tabs extends Component {
                     pform={this.props.pform}
                     rform={this.props.rform}
                     qform={this.props.qform}
+                    dform={this.props.dform}
+                    roomform={this.props.roomform}
                     patientname={this.props.patientname}
                     chart={<DemographicTable currentEmployee={this.props.currentEmployee} />}
                     reviewcards={<ReviewCards reviews={this.props.reviews} />}

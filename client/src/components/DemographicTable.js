@@ -6,9 +6,9 @@ const tableRow = (patient) => (
         <Table.Cell>{patient.medical_rec_number}</Table.Cell>
         <Table.Cell>{patient.admit_date}</Table.Cell>
         <Table.Cell>{patient.financial_class}</Table.Cell>
-        <Table.Cell>{patient.demographic.patient_name}</Table.Cell>
-        <Table.Cell>{patient.demographic.age}</Table.Cell>
-        <Table.Cell>{patient.demographic.date_of_birth}</Table.Cell>
+        <Table.Cell>{patient.demographic.patient_name || "Loading..."}</Table.Cell>
+        <Table.Cell>{patient.demographic.age || "Loading..."}</Table.Cell>
+        <Table.Cell>{patient.demographic.date_of_birth || "Loading..."}</Table.Cell>
         <Table.Cell>{patient.status}</Table.Cell>
         <Table.Cell selectable><a href='#'>Select</a></Table.Cell>
     </Table.Row>
