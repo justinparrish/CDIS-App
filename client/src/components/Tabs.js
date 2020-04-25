@@ -16,10 +16,6 @@ const panes = [
                 <Modal.Description>
                 <h2>Patient Info</h2>
                 {props.pform}
-                {/* <h2>Demographic Info</h2>
-                {props.dform}
-                <h2>Room Info</h2>
-                {props.roomform} */}
                 </Modal.Description>
                 </Modal.Content>
                 </Modal>
@@ -70,7 +66,6 @@ export default class Tabs extends Component {
                     pform={this.props.pform}
                     rform={this.props.rform}
                     qform={this.props.qform}
-                    dform={this.props.dform}
                     roomform={this.props.roomform}
                     patientname={this.props.patientname}
                     chart={<DemographicTable currentEmployee={this.props.currentEmployee} />}

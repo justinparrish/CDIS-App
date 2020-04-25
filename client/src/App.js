@@ -1,11 +1,16 @@
+//Default Imports
 import React from 'react';
 import './App.css';
+
+// Form Components
 import PatientForm from './components/forms/PatientForm'
 import QueryForm from './components/forms/QueryForm';
 import ReviewForm from './components/forms/ReviewForm'
-import DemographicForm from './components/forms/DemographicForm'
-import RoomForm from './components/forms/RoomForm'
+
+// Extra Components
 import Tabs from './components/Tabs'
+
+// Loading Screen Dependents
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import "bootstrap/dist/css/bootstrap.css";
@@ -15,9 +20,7 @@ import * as legoData from "./legoloading.json"
 
 
 // --------- Employee ------------
-const getEmployeeName = (employee) => (
-  <h4>Employee Name: {employee.name}</h4>
-)
+const getEmployeeName = (employee) => (<h4>Employee Name: {employee.name}</h4>)
 
 // ---------- Patient Info * ----------
 const getPatientInfo = (patient) => (
@@ -31,15 +34,8 @@ const getPatientInfo = (patient) => (
   </ul>
 )
 
-const listPatientInfo = (patients) => (
-  <div>{patients.map(getPatientInfo)}</div>
-)
-
-const employeePatients = (employee) => (
-  <div>
-    {listPatientInfo(employee.patients)}
-  </div>
-)
+const listPatientInfo = (patients) => (<div>{patients.map(getPatientInfo)}</div>)
+const employeePatients = (employee) => (<div>{listPatientInfo(employee.patients)}</div>)
 
 // ----------- Patient Demographics * ---------------
 const getPatientDemographics = (patient) => (
@@ -49,17 +45,8 @@ const getPatientDemographics = (patient) => (
     <li>Date of Birth: {patient.demographic.date_of_birth}</li>
   </ul>
 )
-const listPatientDemographic = (patients) => (
-  <div>
-    {patients.map(getPatientDemographics)}
-  </div>
-)
-const patientsDemographic = (employee) => (
-  <div>
-    {listPatientDemographic(employee.patients)}
-  </div>
-)
-
+const listPatientDemographic = (patients) => (<div>{patients.map(getPatientDemographics)}</div>)
+const patientsDemographic = (employee) => (<div>{listPatientDemographic(employee.patients)}</div>)
 
 // ----------- Patient Room Info -------------
 const getPatientRoomInfo = (patient) => (
@@ -71,8 +58,6 @@ const getPatientRoomInfo = (patient) => (
   </ul>
 )
 
-
-
 // ------------ Patient Query -------------
 const getPatientQuery = (query) => (
   <ul style={{ margin: '15px', border: '2px dotted grey' }}>
@@ -83,10 +68,7 @@ const getPatientQuery = (query) => (
     <li>Tx: {query.treatment}</li>
   </ul>
 )
-
-const queryList = (list) => (
-  <div>{list.map(getPatientQuery)}</div>
-)
+const queryList = (list) => (<div>{list.map(getPatientQuery)}</div>)
 
 // ---------- Patient Review/Re-reivews ------------
 const getPatientReview = (review) => (
@@ -101,16 +83,10 @@ const getPatientReview = (review) => (
     <li>Type: {review.type}</li>
   </ul>
 )
-
-const reviewList = (list) => (
-  <div>{list.map(getPatientReview)}</div>
-)
+const reviewList = (list) => (<div>{list.map(getPatientReview)}</div>)
 
 //List of Employees
-const employeeUsername = (employee) => (
-  <option value={employee.id}>{employee.username}</option>
-)
-
+const employeeUsername = (employee) => (<option value={employee.id}>{employee.username}</option>)
 const employeeList = (employees, currentEmployee, onChange) => (
   <select value={currentEmployee} onChange={(evnt) => onChange(evnt.target.value)}>
     {employees.map(employeeUsername)}
@@ -118,10 +94,7 @@ const employeeList = (employees, currentEmployee, onChange) => (
 )
 
 //List of Cars
-const patientNameOption = (patient) => (
-  <option value={patient.account_number || "Loading..."}>{patient.demographic.patient_name || "Loading..."}</option>
-)
-
+const patientNameOption = (patient) => (<option value={patient.account_number || "Loading..."}>{patient.demographic.patient_name || "Loading..."}</option>)
 const patientList = (patients, currentPatient, onChange) => (
   <select value={currentPatient} onChange={(evnt) => onChange(evnt.target.value)}>
     {/* <option value={undefined}>Select Patient</option> */}
@@ -449,28 +422,20 @@ class App extends React.Component {
           }
           console.log("Patient Info part 1", newPatientInfo)
           let newDemographic = {
-            // id: 2,
             patient_name: demographic.patient_name,
             age: demographic.age,
             date_of_birth: demographic.date_of_birth,
-            // patient: nextPatientId
           }
           let newRoom = {
-            // id: ,
             nursing_unit: room.nursing_unit,
             room: room.room,
             date_in: room.date_in,
             date_out: room.date_out,
-            // patient: nextPatientId
           }
           newPatientInfo.demographic = newDemographic
           newPatientInfo.room = newRoom
           newPatientInfo.query = []
           newPatientInfo.review = []
-          console.log("Demographic", newDemographic)
-          console.log("Room Info", newRoom)
-          // console.log("Patient Info id", newPatientInfo.id)
-
       
           employees[this.state.currentEmployee].patients.push(newPatientInfo)
       
@@ -490,7 +455,6 @@ class App extends React.Component {
       let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].query.length + 1
   
       let newQuery = {
-        // id: nextQueryId,
         doctor_name: info.doctor_name,
         doctor_question: info.doctor_question,
         clinical_indicators: info.clinical_indicators,
@@ -501,9 +465,6 @@ class App extends React.Component {
       }
   
       employees[this.state.currentEmployee].patients[this.state.currentPatient].query.push(newQuery)
-  
-      console.log("New Query", newQuery)
-      console.log(nextQueryId)
   
       this.setState({ employees })
     })
@@ -516,7 +477,6 @@ class App extends React.Component {
       let nextQueryId = employees[this.state.currentEmployee].patients[this.state.currentPatient].review.length + 1
   
       let newReview = {
-        // id: nextQueryId,
         ed: info.ed,
         vital_signs: info.vital_signs,
         diagnostics: info.diagnostics,
@@ -531,8 +491,6 @@ class App extends React.Component {
   
       employees[this.state.currentEmployee].patients[this.state.currentPatient].review.push(newReview)
   
-      console.log("New Review", newReview)
-      console.log("next id",nextQueryId)
       this.setState({ employees })
     })
   }
@@ -571,8 +529,6 @@ class App extends React.Component {
               pform={<PatientForm addNewPatient={this.addNewPatient} />}
               rform={<ReviewForm addNewReview={this.addNewReview} />}
               qform={<QueryForm addNewQuery={this.addNewQuery} />}
-              // dform={<DemographicForm addNewPatient={this.addNewPatient} />}
-              // roomform={<RoomForm addNewPatient={this.addNewPatient} />}
               patientInfo={getPatientInfo(this.getCurrentPatient())}
               demographic={getPatientDemographics(this.getCurrentPatient())}
               roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
@@ -585,8 +541,6 @@ class App extends React.Component {
             />
           </div>
         }
-
-        {/* <LoginForm authenicate={this.authenicate}/> */}
       </div>
     )
   }

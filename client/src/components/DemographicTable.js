@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Segment, Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 const tableRow = (patient) => (
     <Table.Row>

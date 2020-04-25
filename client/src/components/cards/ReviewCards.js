@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, Image, CardDescription } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
 const card = (review) => (
     <Card>
