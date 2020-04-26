@@ -1,3 +1,6 @@
-db.sqlite3
-/cdis/__pycache__/
-/cdis_app/__pycache__/
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
