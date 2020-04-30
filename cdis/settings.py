@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
 REACT_APP_DIR = "client"
 
 STATICFILES_DIRS = [
-    os.path.join(REACT_APP_DIR, 'build', 'static')
+    os.path.join( 'build', 'static')
 ]
 
 django_heroku.settings(locals())
