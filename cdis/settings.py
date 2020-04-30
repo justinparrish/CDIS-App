@@ -26,7 +26,7 @@ SECRET_KEY = ')f4#ec)8&_a((kg80_ug%%d!8!cldj*f@sj+x7e!6d+#4s54l&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://cdis-dh.herokuapp.com/', '127.0.0.1:8000']
 
 
 # Application definition
@@ -120,7 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {    
     'DEFAULT_PERMISSION_CLASSES': [    
@@ -128,10 +128,15 @@ REST_FRAMEWORK = {
     ]    
 }
 
-REACT_APP_DIR = "client"
+# REACT_APP_DIR = "client"
 
-STATICFILES_DIRS = [
-    os.path.join(REACT_APP_DIR, 'build', 'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(REACT_APP_DIR, 'build', 'static')
+# ]
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 
 django_heroku.settings(locals())
