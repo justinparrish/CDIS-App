@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Tab, Modal, Button } from 'semantic-ui-react'
 import DemographicTable from './DemographicTable'
-import PatientInfoAccordion from './PatientInfoAccordion'
+import PatientInfoAccordion from './PatientInfoAccoridion'
 import ReviewCards from './cards/ReviewCards'
 import QueryCard from './cards/QueryCards'
 
