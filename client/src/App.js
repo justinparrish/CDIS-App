@@ -531,12 +531,12 @@ class App extends React.Component {
               qform={<QueryForm addNewQuery={this.addNewQuery} />}
               patientInfo={getPatientInfo(this.getCurrentPatient())}
               demographic={getPatientDemographics(this.getCurrentPatient())}
-              roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
+              // roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
               reviews={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].review}
               queries={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].query}
-              info={getPatientInfo(this.getCurrentPatient())}
-              roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
-              demographics={getPatientDemographics(this.getCurrentPatient())}
+              // info={getPatientInfo(this.getCurrentPatient())}
+              // roomInfo={getPatientRoomInfo(this.getCurrentPatient())}
+              // demographics={getPatientDemographics(this.getCurrentPatient())}
               patientname={this.state.employees[this.state.currentEmployee].patients[this.state.currentPatient].demographic.patient_name || "Loading..."}
             />
           </div>
