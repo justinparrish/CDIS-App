@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Tab, Modal, Button } from 'semantic-ui-react'
 import DemographicTable from './DemographicTable'
-// import PatientInfoAccordion from './accordions/PatientInfoAccordion'
+import PatientInfoAccordion from './accordions/PatientInfoAccordion'
 import ReviewCards from './cards/ReviewCards'
 import QueryCard from './cards/QueryCards'
 
@@ -71,10 +71,10 @@ export default class Tabs extends Component {
                     chart={<DemographicTable currentEmployee={this.props.currentEmployee} />}
                     reviewcards={<ReviewCards reviews={this.props.reviews} />}
                     querycards={<QueryCard queries={this.props.queries} />}
-                    // patientaccordion={<PatientInfoAccordion
-                    //     info={this.props.info}
-                    //     roomInfo={this.props.roomInfo}
-                    //     demographics={this.props.demographics} />}
+                    patientaccordion={<PatientInfoAccordion
+                        info={this.props.info}
+                        roomInfo={this.props.roomInfo}
+                        demographics={this.props.demographics} />}
                 />
             </div>
         )
