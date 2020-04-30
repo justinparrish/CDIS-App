@@ -8,6 +8,8 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
+    "eslint-plugin-flowtype": "^3.13.0",
+    "jquery": "^1.9.1",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.0",
@@ -15,7 +17,8 @@
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "semantic-ui-react": "^0.88.2"
+    "semantic-ui-react": "^0.88.2",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,8 +28,8 @@
     "postinstall": "npm run build"
   },
   "engines": {
-    "node" : "v12.10.0",
-    "npm" : "6.14.2"
+    "node": "v12.10.0",
+    "npm": "6.14.2"
   },
   "eslintConfig": {
     "extends": "react-app"
