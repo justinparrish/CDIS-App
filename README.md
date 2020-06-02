@@ -17,6 +17,6 @@ The CDIS Documentation Helper application is a more proficient way for *Clinical
 - Semantic UI React
 
 ## Wireframes / Sketches
-
+Coming Soon!
 ## ERD Images
-
+Coming Soon!
